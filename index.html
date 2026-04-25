@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zynex Studio</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: {
+            neon: { cyan: '#06b6d4', blue: '#3b82f6', violet: '#8b5cf6', purple: '#a855f7' },
+            dark: { 900: '#0a0a1a', 800: '#0f0f2a', 700: '#161638', 600: '#1e1e4a' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark-900 text-white font-inter">
+
+  <!-- Particle Canvas -->
+  <canvas id="particles"></canvas>
+
+  <!-- Grid Overlay -->
+  <div class="grid-overlay"></div>
+
+  <!-- Ambient Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
+      <a href="#home" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 flex items-center justify-center transition-transform group-hover:scale-110">
+          <span class="text-white font-bold text-sm">Z</span>
+        </div>
+        <span class="text-lg font-bold dark-text">Zynex <span class="gradient-text">Studio</span></span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#home" class="text-sm font-medium text-neutral-300 hover:text-cyan-400 transition-colors dark-subtext">Home</a>
+        <a href="#features" class="text-sm font-medium text-neutral-300 hover:text-cyan-400 transition-colors dark-subtext">Features</a>
+        <a href="#pricing" class="text-sm font-medium text-neutral-300 hover:text-cyan-400 transition-colors dark-subtext">Pricing</a>
+        <a href="#portfolio" class="text-sm font-medium text-neutral-300 hover:text-cyan-400 transition-colors dark-subtext">Portfolio</a>
+        <a href="#contact" class="text-sm font-medium text-neutral-300 hover:text-cyan-400 transition-colors dark-subtext">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="toggle-track" id="themeToggle" title="Toggle theme">
+          <div class="toggle-thumb"></div>
+        </div>
+        <a href="#contact" class="hidden lg:inline-flex btn-glow text-white text-sm font-semibold px-5 py-2.5 rounded-full items-center gap-2">
+          Mulai <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <button id="burgerBtn" class="lg:hidden text-neutral-300 hover:text-cyan-400 transition-colors">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-72 h-full z-[60] glass">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-10">
+        <span class="font-bold gradient-text text-lg">Menu</span>
+        <button id="closeMobile" class="text-neutral-400 hover:text-white transition-colors">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+      <div class="flex flex-col gap-6">
+        <a href="#home" class="mobile-link text-lg font-medium text-neutral-300 hover:text-cyan-400 transition-colors">Home</a>
+        <a href="#features" class="mobile-link text-lg font-medium text-neutral-300 hover:text-cyan-400 transition-colors">Features</a>
+        <a href="#pricing" class="mobile-link text-lg font-medium text-neutral-300 hover:text-cyan-400 transition-colors">Pricing</a>
+        <a href="#portfolio" class="mobile-link text-lg font-medium text-neutral-300 hover:text-cyan-400 transition-colors">Portfolio</a>
+        <a href="#contact" class="mobile-link text-lg font-medium text-neutral-300 hover:text-cyan-400 transition-colors">Contact</a>
+        <a href="#contact" class="btn-glow text-white text-center font-semibold px-6 py-3 rounded-full mt-4">Mulai Sekarang</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+      <div class="space-y-8">
+        <div class="anim-fade-up">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold uppercase tracking-widest text-cyan-400">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            Build Fast. Deploy Smart.
+          </span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight anim-fade-up dark-text" style="transition-delay: 0.1s">
+          Jasa Pembuatan<br>Website<br><span class="gradient-text">Profesional</span>
+        </h1>
+        <p class="text-lg lg:text-xl text-neutral-400 max-w-lg leading-relaxed anim-fade-up dark-subtext" style="transition-delay: 0.2s">
+          Solusi website modern untuk bisnis, toko online, dan personal branding. Cepat, responsif, dan siap deploy.
+        </p>
+        <div class="flex flex-wrap gap-4 anim-fade-up" style="transition-delay: 0.3s">
+          <a href="#contact" class="btn-glow text-white font-semibold px-8 py-4 rounded-full text-sm inline-flex items-center gap-2">
+            Mulai Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a href="#pricing" class="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-sm glass glow-border-static hover:border-cyan-400/40 text-neutral-200 dark-subtext">
+            Lihat Paket <i data-lucide="chevron-down" class="w-4 h-4"></i>
+          </a>
+        </div>
+        <div class="flex gap-8 pt-4 anim-fade-up" style="transition-delay: 0.4s">
+          <div><div class="text-2xl font-bold gradient-text">50+</div><div class="text-xs text-neutral-500 dark-subtext">Project Selesai</div></div>
+          <div><div class="text-2xl font-bold gradient-text">24hr</div><div class="text-xs text-neutral-500 dark-subtext">Fast Delivery</div></div>
+          <div><div class="text-2xl font-bold gradient-text">100%</div><div class="text-xs text-neutral-500 dark-subtext">Source Code</div></div>
+        </div>
+      </div>
+
+      <div class="relative flex items-center justify-center anim-zoom-in" style="transition-delay: 0.3s">
+        <div class="cube-wrapper float hidden lg:block" style="position: absolute; right: 10%; top: 5%;">
+          <div class="cube">
+            <div class="cube-face"></div><div class="cube-face"></div><div class="cube-face"></div>
+            <div class="cube-face"></div><div class="cube-face"></div><div class="cube-face"></div>
+          </div>
+        </div>
+        <div class="code-window w-full max-w-md float-slow shadow-2xl" style="box-shadow: 0 0 60px rgba(6,182,212,0.1), 0 0 120px rgba(139,92,246,0.05);">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+            <div class="code-dots flex gap-1.5">
+              <span style="background:#ff5f57"></span><span style="background:#ffbd2e"></span><span style="background:#28ca41"></span>
+            </div>
+            <span class="text-xs text-neutral-500 ml-2 dark-subtext">zynex-studio.tsx</span>
+          </div>
+          <div class="p-5 text-sm font-mono leading-relaxed">
+            <div><span class="text-violet-400">const</span> <span class="text-cyan-400">studio</span> = {</div>
+            <div class="pl-4"><span class="text-blue-400">name</span>: <span class="text-green-400">"Zynex Studio"</span>,</div>
+            <div class="pl-4"><span class="text-blue-400">speed</span>: <span class="text-amber-400">"24hr"</span>,</div>
+            <div class="pl-4"><span class="text-blue-400">quality</span>: <span class="text-amber-400">100</span>,</div>
+            <div class="pl-4"><span class="text-blue-400">deploy</span>: <span class="text-green-400">"auto"</span>,</div>
+            <div class="pl-4"><span class="text-blue-400">source</span>: <span class="text-violet-400">true</span>,</div>
+            <div>};</div>
+            <div class="mt-2"><span class="text-violet-400">export default</span> <span class="text-cyan-400">studio</span>;</div>
+          </div>
+        </div>
+        <div class="absolute top-4 left-4 glass rounded-xl px-3 py-2 float-delay" style="animation-delay: 1s;">
+          <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div><span class="text-xs text-green-400 font-medium">Deployed</span></div>
+        </div>
+        <div class="absolute bottom-8 left-0 glass rounded-xl px-3 py-2 float" style="animation-delay: 2s;">
+          <div class="flex items-center gap-2"><i data-lucide="zap" class="w-3 h-3 text-amber-400"></i><span class="text-xs text-amber-400 font-medium">+98 Performance</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient max-w-4xl mx-auto"></div>
+
+  <!-- ========== FEATURES SECTION ========== -->
+  <section id="features" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="anim-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-6">
+          <i data-lucide="sparkles" class="w-3 h-3"></i> Kenapa Pilih Kami
+        </span>
+        <h2 class="anim-fade-up text-3xl lg:text-5xl font-bold tracking-tight dark-text" style="transition-delay:0.1s">Fitur <span class="gradient-text">Unggulan</span></h2>
+        <p class="anim-fade-up text-neutral-400 mt-4 dark-subtext" style="transition-delay:0.2s">Setiap project dibuat dengan standar tinggi dan teknologi terkini.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glow-border-static glass rounded-2xl p-8 anim-zoom-in group hover:bg-white/5 transition-colors">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"><i data-lucide="code-2" class="w-6 h-6 text-cyan-400"></i></div>
+          <h3 class="font-semibold text-lg mb-2 dark-text">Full Source Code</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed dark-subtext">Source code lengkap diberikan kepada Anda. Bebas modifikasi tanpa batas.</p>
+        </div>
+        <div class="glow-border-static glass rounded-2xl p-8 anim-zoom-in group hover:bg-white/5 transition-colors" style="transition-delay:0.1s">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-400/20 to-purple-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"><i data-lucide="palette" class="w-6 h-6 text-violet-400"></i></div>
+          <h3 class="font-semibold text-lg mb-2 dark-text">Custom Request</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed dark-subtext">Desain & fitur disesuaikan sepenuhnya dengan kebutuhan Anda.</p>
+        </div>
+        <div class="glow-border-static glass rounded-2xl p-8 anim-zoom-in group hover:bg-white/5 transition-colors" style="transition-delay:0.2s">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400/20 to-emerald-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"><i data-lucide="rocket" class="w-6 h-6 text-green-400"></i></div>
+          <h3 class="font-semibold text-lg mb-2 dark-text">Free Deployment</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed dark-subtext">Deploy gratis ke Vercel atau Cloudflare. Website langsung online.</p>
+        </div>
+        <div class="glow-border-static glass rounded-2xl p-8 anim-zoom-in group hover:bg-white/5 transition-colors" style="transition-delay:0.1s">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400/20 to-orange-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"><i data-lucide="zap" class="w-6 h-6 text-amber-400"></i></div>
+          <h3 class="font-semibold text-lg mb-2 dark-text">Pengerjaan Cepat</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed dark-subtext">Website selesai dalam waktu cepat. Paket Pro hanya 1 hari pengerjaan.</p>
+        </div>
+        <div class="glow-border-static glass rounded-2xl p-8 anim-zoom-in group hover:bg-white/5 transition-colors" style="transition-delay:0.2s">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400/20 to-rose-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"><i data-lucide="figma" class="w-6 h-6 text-pink-400"></i></div>
+          <h3 class="font-semibold text-lg mb-2 dark-text">Desain Modern</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed dark-subtext">UI/UX terkini dengan estetika premium. Mengikuti tren global.</p>
+        </div>
+        <div class="glow-border-static glass rounded-2xl p-8 anim-zoom-in group hover:bg-white/5 transition-colors" style="transition-delay:0.3s">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400/20 to-indigo-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"><i data-lucide="smartphone" class="w-6 h-6 text-blue-400"></i></div>
+          <h3 class="font-semibold text-lg mb-2 dark-text">Responsive</h3>
+          <p class="text-sm text-neutral-400 leading-relaxed dark-subtext">Tampilan sempurna di semua device — desktop, tablet, dan mobile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient max-w-4xl mx-auto"></div>
+
+  <!-- ========== PRICING SECTION ========== -->
+  <section id="pricing" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="anim-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-6">
+          <i data-lucide="credit-card" class="w-3 h-3"></i> Harga Terjangkau
+        </span>
+        <h2 class="anim-fade-up text-3xl lg:text-5xl font-bold tracking-tight dark-text" style="transition-delay:0.1s">Pilih <span class="gradient-text">Paket</span> Anda</h2>
+        <p class="anim-fade-up text-neutral-400 mt-4 dark-subtext" style="transition-delay:0.2s">Harga transparan, tanpa biaya tersembunyi.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Starter -->
+        <div class="glow-border-static glass rounded-2xl p-8 lg:p-10 anim-zoom-in relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-cyan-400/5 rounded-full blur-[80px] group-hover:bg-cyan-400/10 transition-colors"></div>
+          <div class="relative">
+            <span class="text-xs font-semibold uppercase tracking-widest text-cyan-400">Starter</span>
+            <div class="mt-4 flex items-baseline gap-1"><span class="text-5xl font-extrabold dark-text">10K</span><span class="text-neutral-500 text-sm dark-subtext">/project</span></div>
+            <p class="text-sm text-neutral-400 mt-3 dark-subtext">Cocok untuk bisnis kecil & personal branding.</p>
+            <div class="divider-gradient my-6"></div>
+            <ul class="space-y-4">
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0"></i>Web Store</li>
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0"></i>Deploy ke Cloudflare</li>
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0"></i>Full source code</li>
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-cyan-400 flex-shrink-0"></i>Custom request</li>
+            </ul>
+            <a href="https://wa.me/6285736132414?text=Halo%20Zynex%20Studio,%20saya%20tertarik%20dengan%20paket%20Starter" target="_blank" class="mt-8 block text-center font-semibold py-3.5 rounded-full glass glow-border-static hover:border-cyan-400/40 text-sm text-neutral-200 transition-all dark-subtext">Pilih Starter</a>
+          </div>
+        </div>
+        <!-- Pro -->
+        <div class="glow-border-static glass rounded-2xl p-8 lg:p-10 anim-zoom-in relative overflow-hidden group popular-glow" style="transition-delay:0.15s">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-violet-400/5 rounded-full blur-[80px] group-hover:bg-violet-400/10 transition-colors"></div>
+          <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 text-xs font-bold text-white">POPULER</div>
+          <div class="relative">
+            <span class="text-xs font-semibold uppercase tracking-widest text-violet-400">Pro</span>
+            <div class="mt-4 flex items-baseline gap-1"><span class="text-5xl font-extrabold dark-text">15K</span><span class="text-neutral-500 text-sm dark-subtext">/project</span></div>
+            <p class="text-sm text-neutral-400 mt-3 dark-subtext">Untuk bisnis yang butuh kecepatan & performa tinggi.</p>
+            <div class="divider-gradient my-6"></div>
+            <ul class="space-y-4">
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-violet-400 flex-shrink-0"></i>Web Store</li>
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-violet-400 flex-shrink-0"></i>Deploy ke Vercel</li>
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-violet-400 flex-shrink-0"></i>Free deployment</li>
+              <li class="flex items-center gap-3 text-sm dark-text"><i data-lucide="check" class="w-5 h-5 text-violet-400 flex-shrink-0"></i>Fast delivery (1 hari)</li>
+            </ul>
+            <a href="https://wa.me/6285736132414?text=Halo%20Zynex%20Studio,%20saya%20tertarik%20dengan%20paket%20Pro" target="_blank" class="mt-8 block text-center btn-glow font-semibold py-3.5 rounded-full text-sm text-white">Pilih Pro</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient max-w-4xl mx-auto"></div>
+
+  <!-- ========== PORTFOLIO SECTION ========== -->
+  <section id="portfolio" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="anim-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-6">
+          <i data-lucide="briefcase" class="w-3 h-3"></i> Portfolio
+        </span>
+        <h2 class="anim-fade-up text-3xl lg:text-5xl font-bold tracking-tight dark-text" style="transition-delay:0.1s">Project <span class="gradient-text">Terbaru</span></h2>
+        <p class="anim-fade-up text-neutral-400 mt-4 dark-subtext" style="transition-delay:0.2s">Beberapa project yang sudah kami selesaikan.</p>
+      </div>
+
+      <div class="flex justify-center gap-3 mb-12 anim-fade-up flex-wrap" style="transition-delay:0.3s">
+        <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium glass border border-transparent hover:border-cyan-400/30 transition-all" data-filter="all">All</button>
+        <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium glass border border-transparent hover:border-cyan-400/30 transition-all text-neutral-400 dark-subtext" data-filter="business">Business</button>
+        <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium glass border border-transparent hover:border-cyan-400/30 transition-all text-neutral-400 dark-subtext" data-filter="personal">Personal</button>
+        <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium glass border border-transparent hover:border-cyan-400/30 transition-all text-neutral-400 dark-subtext" data-filter="ecommerce">E-Commerce</button>
+      </div>
+
+      <div id="portfolioGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="portfolio-item glow-border-static glass rounded-2xl overflow-hidden group anim-zoom-in" data-category="ecommerce">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://picsum.photos/seed/zynex-store/600/340.jpg" alt="Tokopedia Clone" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"><span class="text-white text-sm font-medium">Lihat Detail →</span></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold dark-text">NeoStore</h3>
+            <p class="text-sm text-neutral-400 mt-1 dark-subtext">Toko online modern dengan checkout cepat</p>
+            <div class="flex gap-2 mt-3">
+              <span class="px-2 py-1 rounded-md bg-cyan-400/10 text-cyan-400 text-xs font-medium">Next.js</span>
+              <span class="px-2 py-1 rounded-md bg-violet-400/10 text-violet-400 text-xs font-medium">Tailwind</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item glow-border-static glass rounded-2xl overflow-hidden group anim-zoom-in" data-category="business" style="transition-delay:0.1s">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://picsum.photos/seed/zynex-saas/600/340.jpg" alt="SaaS Dashboard" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"><span class="text-white text-sm font-medium">Lihat Detail →</span></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold dark-text">CloudBoard</h3>
+            <p class="text-sm text-neutral-400 mt-1 dark-subtext">Dashboard analytics untuk SaaS startup</p>
+            <div class="flex gap-2 mt-3">
+              <span class="px-2 py-1 rounded-md bg-blue-400/10 text-blue-400 text-xs font-medium">React</span>
+              <span class="px-2 py-1 rounded-md bg-green-400/10 text-green-400 text-xs font-medium">Node.js</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item glow-border-static glass rounded-2xl overflow-hidden group anim-zoom-in" data-category="personal" style="transition-delay:0.2s">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://picsum.photos/seed/zynex-portfolio/600/340.jpg" alt="Personal Site" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"><span class="text-white text-sm font-medium">Lihat Detail →</span></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold dark-text">FolioX</h3>
+            <p class="text-sm text-neutral-400 mt-1 dark-subtext">Personal portfolio dengan animasi halus</p>
+            <div class="flex gap-2 mt-3">
+              <span class="px-2 py-1 rounded-md bg-amber-400/10 text-amber-400 text-xs font-medium">Astro</span>
+              <span class="px-2 py-1 rounded-md bg-cyan-400/10 text-cyan-400 text-xs font-medium">Tailwind</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item glow-border-static glass rounded-2xl overflow-hidden group anim-zoom-in" data-category="ecommerce">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://picsum.photos/seed/zynex-fashion/600/340.jpg" alt="Fashion Store" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"><span class="text-white text-sm font-medium">Lihat Detail →</span></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold dark-text">LuxeWear</h3>
+            <p class="text-sm text-neutral-400 mt-1 dark-subtext">E-commerce fashion premium</p>
+            <div class="flex gap-2 mt-3">
+              <span class="px-2 py-1 rounded-md bg-violet-400/10 text-violet-400 text-xs font-medium">Next.js</span>
+              <span class="px-2 py-1 rounded-md bg-pink-400/10 text-pink-400 text-xs font-medium">Stripe</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item glow-border-static glass rounded-2xl overflow-hidden group anim-zoom-in" data-category="business" style="transition-delay:0.1s">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://picsum.photos/seed/zynex-agency/600/340.jpg" alt="Agency Site" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"><span class="text-white text-sm font-medium">Lihat Detail →</span></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold dark-text">AgentPro</h3>
+            <p class="text-sm text-neutral-400 mt-1 dark-subtext">Landing page digital agency</p>
+            <div class="flex gap-2 mt-3">
+              <span class="px-2 py-1 rounded-md bg-cyan-400/10 text-cyan-400 text-xs font-medium">React</span>
+              <span class="px-2 py-1 rounded-md bg-violet-400/10 text-violet-400 text-xs font-medium">Framer</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item glow-border-static glass rounded-2xl overflow-hidden group anim-zoom-in" data-category="personal" style="transition-delay:0.2s">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://picsum.photos/seed/zynex-blog/600/340.jpg" alt="Blog Site" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"><span class="text-white text-sm font-medium">Lihat Detail →</span></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold dark-text">MindFlow</h3>
+            <p class="text-sm text-neutral-400 mt-1 dark-subtext">Blog personal dengan CMS modern</p>
+            <div class="flex gap-2 mt-3">
+              <span class="px-2 py-1 rounded-md bg-green-400/10 text-green-400 text-xs font-medium">Vite</span>
+              <span class="px-2 py-1 rounded-md bg-blue-400/10 text-blue-400 text-xs font-medium">Supabase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient max-w-4xl mx-auto"></div>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section id="contact" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="anim-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-6">
+          <i data-lucide="mail" class="w-3 h-3"></i> Hubungi Kami
+        </span>
+        <h2 class="anim-fade-up text-3xl lg:text-5xl font-bold tracking-tight dark-text" style="transition-delay:0.1s">Mari <span class="gradient-text">Berkolaborasi</span></h2>
+        <p class="anim-fade-up text-neutral-400 mt-4 dark-subtext" style="transition-delay:0.2s">Konsultasi gratis. Hubungi kami kapan saja.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div class="glow-border-static glass rounded-2xl p-8 lg:p-10 anim-zoom-in">
+          <h3 class="text-xl font-bold mb-6 dark-text">Info Kontak</h3>
+          <div class="space-y-5">
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-green-400/20 to-emerald-500/20 flex items-center justify-center flex-shrink-0"><i data-lucide="phone" class="w-5 h-5 text-green-400"></i></div>
+              <div><div class="text-xs text-neutral-500 dark-subtext">WhatsApp</div><a href="https://wa.me/6285736132414" target="_blank" class="font-semibold dark-text hover:text-cyan-400 transition-colors">0857-3613-2414</a></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 flex items-center justify-center flex-shrink-0"><i data-lucide="globe" class="w-5 h-5 text-cyan-400"></i></div>
+              <div><div class="text-xs text-neutral-500 dark-subtext">Website</div><span class="font-semibold dark-text">zynex.qzz.io</span></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-400/20 to-purple-500/20 flex items-center justify-center flex-shrink-0"><i data-lucide="clock" class="w-5 h-5 text-violet-400"></i></div>
+              <div><div class="text-xs text-neutral-500 dark-subtext">Response Time</div><span class="font-semibold dark-text">< 1 Jam</span></div>
+            </div>
+          </div>
+          <a href="https://wa.me/6285736132414?text=Halo%20Zynex%20Studio,%20saya%20ingin%20konsultasi%20tentang%20pembuatan%20website" target="_blank" class="mt-8 inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-6 py-3.5 rounded-full text-sm transition-all hover:shadow-lg hover:shadow-green-500/20">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat WhatsApp
+          </a>
+        </div>
+        <div class="glow-border-static glass rounded-2xl p-8 lg:p-10 anim-zoom-in" style="transition-delay:0.15s">
+          <h3 class="text-xl font-bold mb-6 dark-text">Kirim Pesan</h3>
+          <form id="contactForm" class="space-y-5">
+            <div><label class="block text-sm font-medium mb-2 dark-text">Nama</label><input type="text" placeholder="Nama Anda" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 text-sm focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all dark-text custom-input"></div>
+            <div><label class="block text-sm font-medium mb-2 dark-text">Jenis Project</label><select required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-neutral-300 text-sm focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all custom-input"><option value="" class="bg-dark-800">Pilih jenis project</option><option value="business" class="bg-dark-800">Business Website</option><option value="ecommerce" class="bg-dark-800">E-Commerce / Toko Online</option><option value="personal" class="bg-dark-800">Personal / Portfolio</option><option value="other" class="bg-dark-800">Lainnya</option></select></div>
+            <div><label class="block text-sm font-medium mb-2 dark-text">Pesan</label><textarea placeholder="Ceritakan project Anda..." rows="4" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 text-sm focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all resize-none dark-text custom-input"></textarea></div>
+            <button type="submit" class="w-full btn-glow text-white font-semibold py-3.5 rounded-full text-sm inline-flex items-center justify-center gap-2">Kirim Pesan <i data-lucide="send" class="w-4 h-4"></i></button>
+          </form>
+          <div id="formSuccess" class="hidden mt-4 p-4 rounded-xl bg-green-400/10 border border-green-400/20 text-green-400 text-sm text-center">✓ Pesan terkirim! Kami akan segera menghubungi Anda.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="relative py-12 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 flex items-center justify-center"><span class="text-white font-bold text-xs">Z</span></div>
+          <span class="text-sm font-semibold dark-text">Zynex Studio</span>
+        </div>
+        <p class="text-sm text-neutral-500 dark-subtext">© <span id="footerYear"></span> Zynex Studio. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-neutral-500 hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+          <a href="#" class="text-neutral-500 hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+          <a href="#" class="text-neutral-500 hover:text-cyan-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/6285736132414?text=Halo%20Zynex%20Studio!" target="_blank" class="wa-float" aria-label="Chat WhatsApp">
+    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>
