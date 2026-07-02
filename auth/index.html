@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/jpeg" href="../zynex.jpg">
+  <title>Daftar — Zynex Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0a0a1a;color:#e2e8f0;min-height:100vh}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a1a}::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,#06b6d4,#8b5cf6);border-radius:3px}
+
+    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(6,182,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 20%,transparent 70%)}
+    .blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+    .blob-1{width:500px;height:500px;background:rgba(59,130,246,.12);top:-10%;left:-10%;animation:bm1 20s ease-in-out infinite}
+    .blob-2{width:400px;height:400px;background:rgba(139,92,246,.1);bottom:-10%;right:-10%;animation:bm2 25s ease-in-out infinite}
+    .blob-3{width:350px;height:350px;background:rgba(6,182,212,.08);top:40%;left:50%;animation:bm3 18s ease-in-out infinite}
+    @keyframes bm1{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,60px)}}
+    @keyframes bm2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-50px)}}
+    @keyframes bm3{0%,100%{transform:translate(0,0)}33%{transform:translate(-40px,30px)}66%{transform:translate(30px,-20px)}}
+
+    .gradient-text{background:linear-gradient(135deg,#06b6d4,#3b82f6,#8b5cf6,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06)}
+    .divider-gradient{height:1px;background:linear-gradient(90deg,transparent,rgba(6,182,212,.3),rgba(139,92,246,.3),transparent)}
+    .popular-glow{box-shadow:0 0 40px rgba(6,182,212,.15),0 0 80px rgba(139,92,246,.1)}
+
+    .btn-glow{position:relative;overflow:hidden;background:linear-gradient(135deg,#06b6d4,#3b82f6);transition:all .3s;cursor:pointer;border:none;color:#fff;font-family:'Inter',sans-serif}
+    .btn-glow:hover{box-shadow:0 0 25px rgba(6,182,212,.4),0 0 50px rgba(59,130,246,.2);transform:translateY(-2px)}
+    .btn-glow:active{transform:translateY(0)}
+    .btn-glow::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(transparent,rgba(255,255,255,.1),transparent);transform:rotate(45deg) translateY(-100%);transition:transform .6s}
+    .btn-glow:hover::after{transform:rotate(45deg) translateY(100%)}
+    .btn-glow:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(6,182,212,.3)}50%{box-shadow:0 0 20px 4px rgba(6,182,212,.15)}}
+    @keyframes checkPop{0%{transform:scale(0) rotate(-45deg)}60%{transform:scale(1.2) rotate(0)}100%{transform:scale(1) rotate(0)}}
+    @keyframes shake{0%,100%{transform:translateX(0)}15%,45%,75%{transform:translateX(-6px)}30%,60%,90%{transform:translateX(6px)}}
+    @keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes successPulse{0%{transform:scale(0);opacity:0}50%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .auth-wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:40px 20px 80px}
+    .back-btn{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:14px;text-decoration:none;transition:all .3s;margin-bottom:36px;animation:fadeInUp .6s ease-out both}
+    .back-btn:hover{color:#06b6d4;transform:translateX(-4px)}
+    .auth-header{text-align:center;margin-bottom:40px;animation:fadeInUp .6s .05s ease-out both}
+    .auth-header h1{font-size:clamp(24px,5vw,36px);font-weight:800;line-height:1.15;margin-bottom:8px}
+    .auth-header p{color:rgba(255,255,255,.4);font-size:14px}
+
+    .steps{display:flex;justify-content:center;align-items:flex-start;margin-bottom:44px;animation:fadeInUp .6s .1s ease-out both}
+    .step-circle{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:2px solid rgba(255,255,255,.08);color:rgba(255,255,255,.25);transition:all .4s;flex-shrink:0;position:relative;background:#0a0a1a}
+    .step-circle.active{border-color:#06b6d4;color:#06b6d4;background:rgba(6,182,212,.06);animation:pulseGlow 2s infinite}
+    .step-circle.done{border-color:#22c55e;color:#fff;background:#22c55e}
+    .step-circle.done i{animation:checkPop .4s ease-out both}
+    .step-line{width:56px;height:2px;background:rgba(255,255,255,.06);transition:background .5s;margin-top:18px}
+    .step-line.done{background:linear-gradient(90deg,#22c55e,#22c55e)}
+    .step-line.active{background:linear-gradient(90deg,#22c55e,#06b6d4)}
+    .step-label{position:absolute;top:46px;font-size:10px;font-weight:600;white-space:nowrap;color:rgba(255,255,255,.25);transition:color .4s;letter-spacing:.3px}
+    .step-circle.active .step-label{color:#06b6d4}
+    .step-circle.done .step-label{color:#22c55e}
+
+    .panel-container{position:relative;min-height:480px}
+    .panel{position:absolute;top:0;left:0;width:100%;opacity:0;pointer-events:none;transform:translateY(16px);transition:all .45s cubic-bezier(.16,1,.3,1)}
+    .panel.active{opacity:1;pointer-events:all;transform:translateY(0);position:relative}
+
+    .pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:540px){.pkg-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
+    .pkg-card{border-radius:20px;padding:28px 24px;cursor:pointer;transition:all .35s;position:relative;overflow:hidden;background:rgba(255,255,255,.02);border:1.5px solid rgba(255,255,255,.06)}
+    .pkg-card:hover{border-color:rgba(6,182,212,.3);background:rgba(255,255,255,.04)}
+    .pkg-card.selected{border-color:#06b6d4;background:rgba(6,182,212,.06);box-shadow:0 0 30px rgba(6,182,212,.12)}
+    .pkg-card.selected .pkg-check{opacity:1;transform:scale(1)}
+    .pkg-check{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:50%;background:#06b6d4;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all .3s}
+    .pkg-badge{position:absolute;top:14px;right:14px;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:linear-gradient(135deg,#06b6d4,#8b5cf6);color:#fff}
+    .pkg-card.selected .pkg-badge{display:none}
+    .pkg-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+    .pkg-price{font-size:40px;font-weight:800;line-height:1;margin-bottom:4px}
+    .pkg-price span{font-size:14px;font-weight:400;color:rgba(255,255,255,.35)}
+    .pkg-desc{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.5}
+    .pkg-features{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .pkg-features li{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.7)}
+    .pkg-features li i{font-size:14px;flex-shrink:0}
+
+    .form-group{margin-bottom:18px}
+    .form-label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:rgba(255,255,255,.7)}
+    .form-input-wrap{position:relative}
+    .form-input-wrap i.field-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;color:rgba(255,255,255,.2);transition:color .3s;pointer-events:none}
+    .form-input{width:100%;padding:13px 42px 13px 42px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);color:#fff;font-size:14px;font-family:'Inter',sans-serif;transition:all .3s;outline:none}
+    .form-input::placeholder{color:rgba(255,255,255,.2)}
+    .form-input:focus{border-color:rgba(6,182,212,.5);background:rgba(6,182,212,.04);box-shadow:0 0 0 3px rgba(6,182,212,.08)}
+    .form-input:focus + i.field-icon,.form-input:focus ~ i.field-icon{color:#06b6d4}
+    .form-input.error{border-color:#ef4444;background:rgba(239,68,68,.04);box-shadow:0 0 0 3px rgba(239,68,68,.08);animation:shake .4s ease-out}
+    .form-input.valid{border-color:#22c55e;background:rgba(34,197,94,.04)}
+    .form-input:disabled{opacity:.5;cursor:not-allowed}
+
+    .toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.25);cursor:pointer;padding:4px;font-size:14px;transition:color .3s}
+    .toggle-pw:hover{color:rgba(255,255,255,.6)}
+
+    .field-status{font-size:12px;margin-top:5px;min-height:18px;transition:all .3s;display:flex;align-items:center;gap:5px}
+    .field-status.error{color:#ef4444}
+    .field-status.success{color:#22c55e}
+    .field-status.checking{color:#f59e0b}
+    .form-hint{font-size:11px;color:rgba(255,255,255,.22);margin-top:3px}
+
+    .btn-row{display:flex;gap:12px;margin-top:24px}
+    .btn-back{flex:1;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+    .btn-back:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.15)}
+    .btn-next{flex:2;padding:14px;border-radius:14px;font-size:14px;font-weight:700;letter-spacing:.3px}
+
+    .selected-pkg-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;font-size:13px;font-weight:600;margin-bottom:22px}
+
+    .success-box{text-align:center;padding:40px 20px;animation:scaleIn .5s ease-out both}
+    .success-icon{width:80px;height:80px;border-radius:50%;background:rgba(34,197,94,.1);border:2px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;animation:successPulse .6s ease-out both}
+    .success-icon i{font-size:36px;color:#22c55e}
+    .success-box h2{font-size:24px;font-weight:800;margin-bottom:8px}
+    .success-box p{color:rgba(255,255,255,.4);font-size:14px;margin-bottom:8px;line-height:1.6}
+    .success-detail{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);color:#06b6d4;font-size:12px;font-weight:600;margin:3px}
+    .success-details{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:20px 0 28px}
+
+    .spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
+
+    .toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+    .toast{padding:14px 20px;border-radius:14px;font-size:13px;font-weight:500;backdrop-filter:blur(20px);pointer-events:all;animation:slideInRight .4s ease-out both;display:flex;align-items:center;gap:10px;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+    .toast.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+    .toast.success{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#86efac}
+    .toast.info{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.3);color:#67e8f9}
+    .toast.out{animation:slideOutRight .3s ease-in both}
+    @keyframes slideOutRight{to{opacity:0;transform:translateX(40px)}}
+
+    .login-link{text-align:center;margin-top:20px;font-size:13px;color:rgba(255,255,255,.35)}
+    .login-link a{color:#06b6d4;text-decoration:none;font-weight:600;transition:color .3s}
+    .login-link a:hover{color:#22d3ee}
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="auth-wrap">
+    <a href="../" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+
+    <div class="auth-header">
+      <h1>Buat <span class="gradient-text">Akun</span></h1>
+      <p>Daftar untuk memilih paket dan mulai project Anda</p>
+    </div>
+
+    <div class="steps">
+      <div class="step-circle active" id="stepCircle1">1<span class="step-label">Pilih Paket</span></div>
+      <div class="step-line" id="stepLine1"></div>
+      <div class="step-circle" id="stepCircle2">2<span class="step-label">Data Diri</span></div>
+      <div class="step-line" id="stepLine2"></div>
+      <div class="step-circle" id="stepCircle3">3<span class="step-label">Selesai</span></div>
+    </div>
+
+    <div class="panel-container">
+      <!-- PANEL 1: Pilih Paket -->
+      <div class="panel active" id="panel1">
+        <div class="pkg-grid">
+          <div class="pkg-card" data-pkg="starter" onclick="selectPkg('starter')">
+            <span class="pkg-badge" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">STARTER</span>
+            <div class="pkg-check"><i class="fa-solid fa-check text-white text-xs"></i></div>
+            <div class="pkg-name" style="color:#06b6d4">Starter</div>
+            <div class="pkg-price">15K <span>/project</span></div>
+            <div class="pkg-desc">Cocok untuk bisnis kecil & personal branding.</div>
+            <ul class="pkg-features">
+              <li><i class="fa-solid fa-check" style="color:#06b6d4"></i> Web Store</li>
+              <li><i class="fa-solid fa-check" style="color:#06b6d4"></i> Deploy ke Cloudflare</li>
+              <li><i class="fa-solid fa-check" style="color:#06b6d4"></i> Full source code</li>
+              <li><i class="fa-solid fa-check" style="color:#06b6d4"></i> Custom request</li>
+            </ul>
+          </div>
+          <div class="pkg-card popular-glow" data-pkg="pro" onclick="selectPkg('pro')">
+            <span class="pkg-badge">POPULER</span>
+            <div class="pkg-check"><i class="fa-solid fa-check text-white text-xs"></i></div>
+            <div class="pkg-name" style="color:#a855f7">Pro</div>
+            <div class="pkg-price">20K <span>/project</span></div>
+            <div class="pkg-desc">Untuk bisnis yang butuh kecepatan & performa tinggi.</div>
+            <ul class="pkg-features">
+              <li><i class="fa-solid fa-check" style="color:#a855f7"></i> Web Store</li>
+              <li><i class="fa-solid fa-check" style="color:#a855f7"></i> Deploy ke Vercel</li>
+              <li><i class="fa-solid fa-check" style="color:#a855f7"></i> Free deployment</li>
+              <li><i class="fa-solid fa-check" style="color:#a855f7"></i> Fast delivery (1 hari)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-next btn-glow" id="btnToStep2" disabled onclick="goToStep(2)">Lanjutkan <i class="fa-solid fa-arrow-right" style="margin-left:6px"></i></button>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Form Data Diri -->
+      <div class="panel" id="panel2">
+        <div id="selectedPkgBadge" class="selected-pkg-badge" style="background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);color:#06b6d4">
+          <i class="fa-solid fa-tag"></i><span id="selectedPkgText">Paket Starter — 15K</span>
+        </div>
+        <form id="regForm" onsubmit="return false" novalidate>
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <div class="form-input-wrap">
+              <input type="text" id="inputNama" class="form-input" placeholder="Masukkan nama lengkap" autocomplete="name" maxlength="60">
+              <i class="fa-solid fa-user field-icon"></i>
+            </div>
+            <div class="field-status" id="statusNama"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <div class="form-input-wrap">
+              <input type="text" id="inputUsername" class="form-input" placeholder="Contoh: user1" autocomplete="username" maxlength="30">
+              <i class="fa-solid fa-at field-icon"></i>
+            </div>
+            <div class="field-status" id="statusUsername"></div>
+            <div class="form-hint">Hanya huruf kecil, angka, dan underscore. Min 3 karakter.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">No. WhatsApp</label>
+            <div class="form-input-wrap">
+              <input type="tel" id="inputWA" class="form-input" placeholder="08xxxxxxxxxx" autocomplete="tel" maxlength="15">
+              <i class="fa-brands fa-whatsapp field-icon"></i>
+            </div>
+            <div class="field-status" id="statusWA"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Gmail</label>
+            <div class="form-input-wrap">
+              <input type="email" id="inputEmail" class="form-input" placeholder="username@gmail.com" autocomplete="email" maxlength="60">
+              <i class="fa-solid fa-envelope field-icon"></i>
+            </div>
+            <div class="field-status" id="statusEmail"></div>
+            <div class="form-hint">Hanya menerima email dengan domain @gmail.com</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="form-input-wrap">
+              <input type="password" id="inputPassword" class="form-input" placeholder="Min 6 karakter" autocomplete="new-password" maxlength="64" style="padding-right:46px">
+              <i class="fa-solid fa-lock field-icon"></i>
+              <button type="button" class="toggle-pw" onclick="togglePw('inputPassword',this)" aria-label="Tampilkan password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+            <div class="field-status" id="statusPassword"></div>
+            <div class="form-hint">Min 6 karakter, disarankan campuran huruf & angka</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Konfirmasi Password</label>
+            <div class="form-input-wrap">
+              <input type="password" id="inputConfirm" class="form-input" placeholder="Ulangi password" autocomplete="new-password" maxlength="64" style="padding-right:46px">
+              <i class="fa-solid fa-lock field-icon"></i>
+              <button type="button" class="toggle-pw" onclick="togglePw('inputConfirm',this)" aria-label="Tampilkan password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+            <div class="field-status" id="statusConfirm"></div>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="btn-back" onclick="goToStep(1)"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i> Kembali</button>
+            <button type="button" class="btn-next btn-glow" id="btnSubmit" disabled onclick="submitForm()">Daftar Sekarang <i class="fa-solid fa-paper-plane" style="margin-left:6px"></i></button>
+          </div>
+        </form>
+        <div class="login-link">Sudah punya akun? <a href="login.html">Masuk di sini</a></div>
+      </div>
+
+      <!-- PANEL 3: Sukses -->
+      <div class="panel" id="panel3">
+        <div class="success-box">
+          <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+          <h2>Akun <span class="gradient-text">Berhasil Dibuat</span></h2>
+          <p>Data Anda telah tersimpan. Silakan login untuk melanjutkan.</p>
+          <div class="success-details">
+            <div class="success-detail"><i class="fa-solid fa-user"></i> <span id="successNama">-</span></div>
+            <div class="success-detail"><i class="fa-solid fa-at"></i> <span id="successUsername">-</span></div>
+            <div class="success-detail"><i class="fa-brands fa-whatsapp"></i> <span id="successWA">-</span></div>
+            <div class="success-detail"><i class="fa-solid fa-envelope"></i> <span id="successEmail">-</span></div>
+            <div class="success-detail" id="successPkgBadge"><i class="fa-solid fa-tag"></i> <span id="successPkg">-</span></div>
+          </div>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <a href="login.html" class="btn-glow" style="padding:14px 28px;border-radius:14px;font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+              <i class="fa-solid fa-right-to-bracket"></i> Login Sekarang
+            </a>
+            <a href="../" class="btn-back" style="padding:14px 28px;text-decoration:none;text-align:center">Kembali ke Beranda</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = '/api';
+    let selectedPkg = null, currentStep = 1, usernameTimer = null, isSubmitting = false;
+
+    /* Particles */
+    (function(){const c=document.getElementById('particles'),ctx=c.getContext('2d');let w,h,pts=[];function resize(){w=c.width=innerWidth;h=c.height=innerHeight}resize();window.addEventListener('resize',resize);for(let i=0;i<50;i++)pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.5,dx:(Math.random()-.5)*.3,dy:(Math.random()-.5)*.3,o:Math.random()*.35+.1});function draw(){ctx.clearRect(0,0,w,h);pts.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(6,182,212,${p.o})`;ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(6,182,212,${.06*(1-d/120)})`;ctx.stroke()}}requestAnimationFrame(draw)}draw()})();
+
+    /* Toast */
+    function showToast(msg,type='info',dur=4000){const c=document.getElementById('toastContainer'),t=document.createElement('div');t.className=`toast ${type}`;const ic={error:'fa-circle-exclamation',success:'fa-circle-check',info:'fa-circle-info'};t.innerHTML=`<i class="fa-solid ${ic[type]||ic.info}"></i><span>${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},dur)}
+
+    /* Toggle Password */
+    function togglePw(id,btn){const inp=document.getElementById(id);if(inp.type==='password'){inp.type='text';btn.innerHTML='<i class="fa-solid fa-eye-slash"></i>'}else{inp.type='password';btn.innerHTML='<i class="fa-solid fa-eye"></i>'}}
+
+    /* Steps */
+    function goToStep(step){
+      if(step===2&&!selectedPkg)return;if(step===3)return;
+      currentStep=step;
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('panel'+step).classList.add('active');
+      const labels=['','Pilih Paket','Data Diri','Selesai'];
+      for(let i=1;i<=3;i++){const c=document.getElementById('stepCircle'+i);c.classList.remove('active','done');if(i<step){c.classList.add('done');c.innerHTML=`<i class="fa-solid fa-check text-xs"></i><span class="step-label">${labels[i]}</span>`}else if(i===step){c.classList.add('active');c.innerHTML=`${i}<span class="step-label">${labels[i]}</span>`}else{c.innerHTML=`${i}<span class="step-label">${labels[i]}</span>`}}
+      document.getElementById('stepLine1').className='step-line'+(step>1?(step>2?' done':' active'):'');
+      document.getElementById('stepLine2').className='step-line'+(step>2?' done':'');
+      if(step===2&&selectedPkg){const info=selectedPkg==='pro'?{l:'Paket Pro — 20K',c:'#a855f7',bg:'rgba(168,85,247,.08)',bd:'rgba(168,85,247,.2)'}:{l:'Paket Starter — 15K',c:'#06b6d4',bg:'rgba(6,182,212,.08)',bd:'rgba(6,182,212,.2)'};const b=document.getElementById('selectedPkgBadge');b.style.background=info.bg;b.style.borderColor=info.bd;b.style.color=info.c;document.getElementById('selectedPkgText').textContent=info.l}
+    }
+
+    /* Paket */
+    function selectPkg(pkg){selectedPkg=pkg;document.querySelectorAll('.pkg-card').forEach(c=>c.classList.remove('selected'));document.querySelector(`.pkg-card[data-pkg="${pkg}"]`).classList.add('selected');document.getElementById('btnToStep2').disabled=false}
+
+    /* Auto-select dari URL */
+    (function(){const p=new URLSearchParams(location.search).get('paket');if(p==='starter'||p==='pro')selectPkg(p)})();
+
+    /* Validasi */
+    const $=id=>document.getElementById(id);
+    const inputNama=$('inputNama'),inputUsername=$('inputUsername'),inputWA=$('inputWA'),inputEmail=$('inputEmail'),inputPassword=$('inputPassword'),inputConfirm=$('inputConfirm');
+
+    function setStatus(field,html,type){const map={Nama:'statusNama',Username:'statusUsername',WA:'statusWA',Email:'statusEmail',Password:'statusPassword',Confirm:'statusConfirm'};const el=$(map[field]);el.innerHTML=html;el.className='field-status'+(type?' '+type:'')}
+
+    inputNama.addEventListener('input',function(){const v=this.value.trim();if(!v){setStatus('Nama','','');this.classList.remove('error','valid')}else if(v.length<2){setStatus('Nama','Nama terlalu pendek','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Nama','','');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
+
+    inputUsername.addEventListener('input',function(){const v=this.value.trim();clearTimeout(usernameTimer);if(!v){setStatus('Username','','');this.classList.remove('error','valid');this.dataset.available='';checkFormReady();return}if(!/^[a-z0-9_]+$/.test(v)){setStatus('Username','Hanya huruf kecil, angka, dan underscore','error');this.classList.add('error');this.classList.remove('valid');checkFormReady();return}if(v.length<3){setStatus('Username','Min 3 karakter','error');this.classList.add('error');this.classList.remove('valid');checkFormReady();return}this.classList.remove('error','valid');setStatus('Username','<span class="spinner" style="width:12px;height:12px;border-width:2px"></span> Mengecek...','checking');usernameTimer=setTimeout(()=>checkUsername(v),500)});
+
+    async function checkUsername(u){try{const r=await fetch(`${API_BASE}/check-username?u=${encodeURIComponent(u)}`),d=await r.json();if(d.available){setStatus('Username','<i class="fa-solid fa-circle-check"></i> Tersedia','success');inputUsername.classList.remove('error');inputUsername.classList.add('valid');inputUsername.dataset.available='true'}else{setStatus('Username','<i class="fa-solid fa-circle-xmark"></i> Sudah digunakan','error');inputUsername.classList.add('error');inputUsername.classList.remove('valid');inputUsername.dataset.available='false'}}catch(e){setStatus('Username','<i class="fa-solid fa-circle-check"></i> Tersedia','success');inputUsername.classList.remove('error');inputUsername.classList.add('valid');inputUsername.dataset.available='true'}checkFormReady()}
+
+    inputWA.addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'');const v=this.value.trim();if(!v){setStatus('WA','','');this.classList.remove('error','valid')}else if(!/^0[0-9]{8,13}$/.test(v)){setStatus('WA','Format: 08xxxxxxxxxx (10-14 digit)','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('WA','','');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
+
+    inputEmail.addEventListener('input',function(){const v=this.value.trim();if(!v){setStatus('Email','','');this.classList.remove('error','valid')}else if(!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(v)){setStatus('Email','<i class="fa-solid fa-circle-xmark"></i> Hanya @gmail.com','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Email','<i class="fa-solid fa-circle-check"></i> Valid','success');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
+
+    inputPassword.addEventListener('input',function(){const v=this.value;if(!v){setStatus('Password','','');this.classList.remove('error','valid')}else if(v.length<6){setStatus('Password','Min 6 karakter','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Password','<i class="fa-solid fa-circle-check"></i> Kuat','success');this.classList.remove('error');this.classList.add('valid')}if(inputConfirm.value)inputConfirm.dispatchEvent(new Event('input'));checkFormReady()});
+
+    inputConfirm.addEventListener('input',function(){const v=this.value;if(!v){setStatus('Confirm','','');this.classList.remove('error','valid')}else if(v!==inputPassword.value){setStatus('Confirm','<i class="fa-solid fa-circle-xmark"></i> Password tidak cocok','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Confirm','<i class="fa-solid fa-circle-check"></i> Cocok','success');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
+
+    [inputNama,inputUsername,inputWA,inputEmail,inputPassword,inputConfirm].forEach(el=>el.addEventListener('blur',()=>el.dispatchEvent(new Event('input'))));
+
+    function checkFormReady(){const ok=inputNama.value.trim().length>=2&&inputUsername.dataset.available==='true'&&/^0[0-9]{8,13}$/.test(inputWA.value.trim())&&/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(inputEmail.value.trim())&&inputPassword.value.length>=6&&inputConfirm.value===inputPassword.value&&inputConfirm.value.length>0;$('btnSubmit').disabled=!ok}
+
+    /* Submit */
+    async function submitForm(){
+      if(isSubmitting)return;isSubmitting=true;
+      const btn=$('btnSubmit');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Memproses...';
+      const payload={nama:inputNama.value.trim(),username:inputUsername.value.trim(),whatsapp:inputWA.value.trim(),email:inputEmail.value.trim(),password:inputPassword.value,paket:selectedPkg,waktu:new Date().toISOString()};
+      try{
+        const r=await fetch(`${API_BASE}/register`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        const d=await r.json();
+        if(d.success){
+          showToast('Akun berhasil dibuat!','success');
+          $('successNama').textContent=payload.nama;$('successUsername').textContent=payload.username;$('successWA').textContent=payload.whatsapp;$('successEmail').textContent=payload.email;
+          const pl=payload.paket==='pro'?'Paket Pro':'Paket Starter';$('successPkg').textContent=pl;
+          const sp=$('successPkgBadge');if(payload.paket==='pro'){sp.style.background='rgba(168,85,247,.08)';sp.style.borderColor='rgba(168,85,247,.2)';sp.style.color='#a855f7'}else{sp.style.background='rgba(6,182,212,.08)';sp.style.borderColor='rgba(6,182,212,.2)';sp.style.color='#06b6d4'}
+          goToStep(3);
+        }else{
+          showToast(d.message||'Gagal mendaftar.','error');
+          if(d.field==='username'){inputUsername.classList.add('error');inputUsername.classList.remove('valid');inputUsername.dataset.available='false';setStatus('Username','<i class="fa-solid fa-circle-xmark"></i> Sudah digunakan','error')}
+        }
+      }catch(e){showToast('Gagal terhubung ke server.','error');console.error(e)}
+      btn.innerHTML='Daftar Sekarang <i class="fa-solid fa-paper-plane" style="margin-left:6px"></i>';btn.disabled=false;isSubmitting=false;
+    }
+  </script>
+</body>
+</html>
