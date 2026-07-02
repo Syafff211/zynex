@@ -1,6 +1,6 @@
 // ============================================================
 // Cloudflare Pages Functions
-// Binding KV: variable name = "ZYNEX_KV"
+// Binding KV: variable name = "KV"
 // Pages > Settings > Functions > KV namespace bindings
 // ============================================================
 
@@ -44,7 +44,7 @@ async function verifyToken(request, env) {
   const authHeader = request.headers.get('Authorization') || '';
   if (!authHeader.startsWith('Bearer ')) return null;
   const token = authHeader.slice(7);
-  const sessionData = await env.ZYNEX_KV.get(`session:${token}`);
+  const sessionData = await env.KV.get(`session:${token}`);
   if (!sessionData) return null;
   try { return JSON.parse(sessionData); } catch { return null; }
 }
@@ -80,7 +80,7 @@ export async function onRequestGet(context) {
     if (!/^[a-z0-9_]+$/.test(username)) {
       return json({ available: false, message: 'Format username tidak valid' });
     }
-    const existing = await context.env.ZYNEX_KV.get(`user:${username}`);
+    const existing = await context.env.KV.get(`user:${username}`);
     return json({ available: !existing, message: existing ? 'Username sudah digunakan' : 'Username tersedia' });
   }
 
@@ -88,7 +88,7 @@ export async function onRequestGet(context) {
   if (path.startsWith('/user/')) {
     const username = path.split('/user/')[1];
     if (!username) return json({ error: 'Username diperlukan' }, 400);
-    const data = await context.env.ZYNEX_KV.get(`user:${username}`);
+    const data = await context.env.KV.get(`user:${username}`);
     if (!data) return json({ error: 'User tidak ditemukan' }, 404);
     return new Response(data, {
       headers: {
@@ -103,7 +103,7 @@ export async function onRequestGet(context) {
     const session = await verifyToken(context.request, context.env);
     if (!session) return json({ success: false, message: 'Sesi tidak valid' }, 401);
 
-    const rawData = await context.env.ZYNEX_KV.get(`user:${session.username}`);
+    const rawData = await context.env.KV.get(`user:${session.username}`);
     if (!rawData) return json({ success: false, message: 'User tidak ditemukan' }, 404);
 
     const userData = parseUserData(rawData);
@@ -173,7 +173,7 @@ export async function onRequestPost(context) {
       }
 
       // Cek duplikat username
-      const existing = await context.env.ZYNEX_KV.get(`user:${username}`);
+      const existing = await context.env.KV.get(`user:${username}`);
       if (existing) {
         return json({ success: false, message: 'Username sudah digunakan, pilih username lain', field: 'username' }, 409);
       }
@@ -200,15 +200,15 @@ export async function onRequestPost(context) {
       ].join('\n');
 
       // Simpan data user ke KV
-      await context.env.ZYNEX_KV.put(`user:${username}`, content);
+      await context.env.KV.put(`user:${username}`, content);
 
       // Simpan password hash terpisah (tidak di file txt)
-      await context.env.ZYNEX_KV.put(`pw:${username}`, hashedPw);
+      await context.env.KV.put(`pw:${username}`, hashedPw);
 
       // Tambahkan ke userlist
       const listKey = 'userlist';
-      const existingList = await context.env.ZYNEX_KV.get(listKey) || '';
-      await context.env.ZYNEX_KV.put(listKey, existingList + `${username}|${paket}|${timestamp}\n`);
+      const existingList = await context.env.KV.get(listKey) || '';
+      await context.env.KV.put(listKey, existingList + `${username}|${paket}|${timestamp}\n`);
 
       return json({ success: true, message: 'Pendaftaran berhasil' });
 
@@ -228,13 +228,13 @@ export async function onRequestPost(context) {
       }
 
       // Cek user ada atau tidak
-      const userData = await context.env.ZYNEX_KV.get(`user:${username}`);
+      const userData = await context.env.KV.get(`user:${username}`);
       if (!userData) {
         return json({ success: false, message: 'Username tidak ditemukan', field: 'username' }, 404);
       }
 
       // Verifikasi password
-      const storedHash = await context.env.ZYNEX_KV.get(`pw:${username}`);
+      const storedHash = await context.env.KV.get(`pw:${username}`);
       const inputHash = await hashPassword(password);
 
       if (storedHash !== inputHash) {
@@ -253,7 +253,7 @@ export async function onRequestPost(context) {
       });
 
       // Simpan session ke KV (expire 24 jam = 86400 detik)
-      await context.env.ZYNEX_KV.put(`session:${token}`, sessionData, { expirationTtl: 86400 });
+      await context.env.KV.put(`session:${token}`, sessionData, { expirationTtl: 86400 });
 
       return json({
         success: true,
