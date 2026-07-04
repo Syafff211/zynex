@@ -240,7 +240,7 @@
         <div class="success-box">
           <div class="success-icon"><i class="fa-solid fa-check"></i></div>
           <h2>Akun <span class="gradient-text">Berhasil Dibuat</span></h2>
-          <p>Data Anda telah tersimpan. Silakan login untuk melanjutkan.</p>
+          <p>Mengalihkan ke dashboard Anda...</p>
           <div class="success-details">
             <div class="success-detail"><i class="fa-solid fa-user"></i> <span id="successNama">-</span></div>
             <div class="success-detail"><i class="fa-solid fa-at"></i> <span id="successUsername">-</span></div>
@@ -248,25 +248,21 @@
             <div class="success-detail"><i class="fa-solid fa-envelope"></i> <span id="successEmail">-</span></div>
             <div class="success-detail" id="successPkgBadge"><i class="fa-solid fa-tag"></i> <span id="successPkg">-</span></div>
           </div>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-            <a href="login.html" class="btn-glow" style="padding:14px 28px;border-radius:14px;font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px">
-              <i class="fa-solid fa-right-to-bracket"></i> Login Sekarang
-            </a>
-            <a href="../" class="btn-back" style="padding:14px 28px;text-decoration:none;text-align:center">Kembali ke Beranda</a>
-          </div>
+          <div class="spinner" style="width:24px;height:24px;border-width:3px;margin:0 auto"></div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    /* ==================== DATABASE (LOCALSTORAGE -> data.txt) ==================== */
+    /* ==================== DATABASE ==================== */
     const DB_KEY = 'zynex_data_txt';
     function getDB() { try { return JSON.parse(localStorage.getItem(DB_KEY)) || []; } catch { return []; } }
     function saveDB(data) { localStorage.setItem(DB_KEY, JSON.stringify(data)); }
+    // Cek username duplikat (case-insensitive)
     function isUsernameTaken(u) { return getDB().some(d => d.username.toLowerCase() === u.toLowerCase()); }
 
-    /* ==================== UI STATE ==================== */
+    /* ==================== STATE ==================== */
     let selectedPkg = null, currentStep = 1, isSubmitting = false;
     const $=id=>document.getElementById(id);
 
@@ -291,19 +287,26 @@
     function selectPkg(pkg){selectedPkg=pkg;document.querySelectorAll('.pkg-card').forEach(c=>c.classList.remove('selected'));document.querySelector(`.pkg-card[data-pkg="${pkg}"]`).classList.add('selected');$('btnToStep2').disabled=false}
     !function(){const p=new URLSearchParams(location.search).get('paket');if(p==='starter'||p==='pro')selectPkg(p)}();
 
-    /* Validasi */
+    /* ==================== VALIDASI REAL-TIME ==================== */
     function setStatus(f,html,t){const m={Nama:'statusNama',Username:'statusUsername',WA:'statusWA',Email:'statusEmail',Password:'statusPassword',Confirm:'statusConfirm'};const e=$(m[f]);e.innerHTML=html;e.className='field-status'+(t?' '+t:'')}
 
     $('inputNama').addEventListener('input',function(){const v=this.value.trim();if(!v){setStatus('Nama','','');this.classList.remove('error','valid')}else if(v.length<2){setStatus('Nama','Nama terlalu pendek','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Nama','','');this.classList.remove('error');this.classList.add('valid')}checkReady()});
 
+    // VALIDASI USERNAME: cek duplikat real-time ke data.txt
     $('inputUsername').addEventListener('input',function(){
       const v=this.value.trim();
       if(!v){setStatus('Username','','');this.classList.remove('error','valid');this.dataset.ok='';checkReady();return}
       if(!/^[a-z0-9_]+$/.test(v)){setStatus('Username','Hanya huruf kecil, angka, dan underscore','error');this.classList.add('error');this.classList.remove('valid');this.dataset.ok='';checkReady();return}
       if(v.length<3){setStatus('Username','Min 3 karakter','error');this.classList.add('error');this.classList.remove('valid');this.dataset.ok='';checkReady();return}
-      // Cek ke localStorage (data.txt)
-      if(isUsernameTaken(v)){setStatus('Username','<i class="fa-solid fa-circle-xmark"></i> Sudah digunakan','error');this.classList.add('error');this.classList.remove('valid');this.dataset.ok='false'}
-      else{setStatus('Username','<i class="fa-solid fa-circle-check"></i> Tersedia','success');this.classList.remove('error');this.classList.add('valid');this.dataset.ok='true'}
+      
+      // Cek ke database (localStorage/data.txt)
+      if(isUsernameTaken(v)){
+        setStatus('Username','<i class="fa-solid fa-circle-xmark"></i> Username sudah digunakan, pilih yang lain','error');
+        this.classList.add('error');this.classList.remove('valid');this.dataset.ok='false';
+      } else {
+        setStatus('Username','<i class="fa-solid fa-circle-check"></i> Tersedia','success');
+        this.classList.remove('error');this.classList.add('valid');this.dataset.ok='true';
+      }
       checkReady();
     });
 
@@ -317,7 +320,7 @@
 
     function checkReady(){const ok=$('inputNama').value.trim().length>=2&&$('inputUsername').dataset.ok==='true'&&/^0[0-9]{8,13}$/.test($('inputWA').value.trim())&&/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test($('inputEmail').value.trim())&&$('inputPassword').value.length>=6&&$('inputConfirm').value===$('inputPassword').value&&$('inputConfirm').value.length>0;$('btnSubmit').disabled=!ok}
 
-    /* Submit */
+    /* ==================== SUBMIT ==================== */
     async function submitForm(){
       if(isSubmitting)return;isSubmitting=true;
       const btn=$('btnSubmit');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Memproses...';
@@ -332,12 +335,20 @@
         waktu: new Date().toISOString()
       };
 
-      // 1. Simpan ke LocalStorage (sebagai data.txt pengganti database)
+      // 1. Simpan ke LocalStorage (data.txt)
       const db = getDB();
       db.push(payload);
       saveDB(db);
 
-      // 2. Kirim ke WhatsApp kamu via Wa.me (sebagai notifikasi admin)
+      // 2. Buat session langsung (otomatis login)
+      localStorage.setItem('zynex_session', JSON.stringify({
+        username: payload.username,
+        nama: payload.nama,
+        paket: payload.paket,
+        expires: Date.now() + 86400000
+      }));
+
+      // 3. Kirim notifikasi ke WhatsApp admin
       const pkgLabel = payload.paket === 'pro' ? 'Pro (20K)' : 'Starter (15K)';
       const waMsg = encodeURIComponent(
         `*PENDAFTARAN BARU - ZYNEX STUDIO*\n\n` +
@@ -350,7 +361,7 @@
       );
       window.open(`https://wa.me/6285141308100?text=${waMsg}`, '_blank');
 
-      // 3. Tampilkan sukses
+      // 4. Tampilkan sukses lalu redirect ke dashboard
       showToast('Akun berhasil dibuat!', 'success');
       $('successNama').textContent = payload.nama;
       $('successUsername').textContent = payload.username;
@@ -360,7 +371,11 @@
       const sp = $('successPkgBadge');
       if(payload.paket === 'pro'){sp.style.background='rgba(168,85,247,.08)';sp.style.borderColor='rgba(168,85,247,.2)';sp.style.color='#a855f7'}
       else{sp.style.background='rgba(6,182,212,.08)';sp.style.borderColor='rgba(6,182,212,.2)';sp.style.color='#06b6d4'}
+      
       goToStep(3);
+
+      // 5. Redirect otomatis ke dashboard setelah 2 detik
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
 
       btn.innerHTML = 'Daftar Sekarang <i class="fa-solid fa-paper-plane" style="margin-left:6px"></i>';
       btn.disabled = false; isSubmitting = false;
