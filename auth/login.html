@@ -8,11 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0a0a1a;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0a0a1a;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center}
     ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a1a}::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,#06b6d4,#8b5cf6);border-radius:3px}
-
     #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
     .grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(6,182,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 20%,transparent 70%)}
     .blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
@@ -20,7 +17,6 @@
     .blob-2{width:400px;height:400px;background:rgba(139,92,246,.1);bottom:-10%;right:-10%;animation:bm2 25s ease-in-out infinite}
     @keyframes bm1{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,60px)}}
     @keyframes bm2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-50px)}}
-
     .gradient-text{background:linear-gradient(135deg,#06b6d4,#3b82f6,#8b5cf6,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .glass{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06)}
     .btn-glow{position:relative;overflow:hidden;background:linear-gradient(135deg,#06b6d4,#3b82f6);transition:all .3s;cursor:pointer;border:none;color:#fff;font-family:'Inter',sans-serif}
@@ -29,22 +25,14 @@
     .btn-glow::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(transparent,rgba(255,255,255,.1),transparent);transform:rotate(45deg) translateY(-100%);transition:transform .6s}
     .btn-glow:hover::after{transform:rotate(45deg) translateY(100%)}
     .btn-glow:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
-
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
     @keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
     @keyframes shake{0%,100%{transform:translateX(0)}15%,45%,75%{transform:translateX(-6px)}30%,60%,90%{transform:translateX(6px)}}
     @keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
     @keyframes spin{to{transform:rotate(360deg)}}
-
     .login-card{position:relative;z-index:1;width:100%;max-width:420px;margin:20px;padding:40px 32px;border-radius:24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(20px);animation:scaleIn .5s ease-out both}
-    .login-logo{text-align:center;margin-bottom:8px}
-    .login-logo img{width:48px;height:48px;border-radius:14px;object-fit:cover}
-    .login-header{text-align:center;margin-bottom:32px}
-    .login-header h1{font-size:28px;font-weight:800;margin-bottom:6px}
-    .login-header p{color:rgba(255,255,255,.4);font-size:14px}
-
-    .form-group{margin-bottom:20px}
-    .form-label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:rgba(255,255,255,.7)}
+    .login-logo{text-align:center;margin-bottom:8px}.login-logo img{width:48px;height:48px;border-radius:14px;object-fit:cover}
+    .login-header{text-align:center;margin-bottom:32px}.login-header h1{font-size:28px;font-weight:800;margin-bottom:6px}.login-header p{color:rgba(255,255,255,.4);font-size:14px}
+    .form-group{margin-bottom:20px}.form-label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:rgba(255,255,255,.7)}
     .form-input-wrap{position:relative}
     .form-input-wrap i.field-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;color:rgba(255,255,255,.2);transition:color .3s;pointer-events:none}
     .form-input{width:100%;padding:13px 42px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);color:#fff;font-size:14px;font-family:'Inter',sans-serif;transition:all .3s;outline:none}
@@ -52,22 +40,13 @@
     .form-input:focus{border-color:rgba(6,182,212,.5);background:rgba(6,182,212,.04);box-shadow:0 0 0 3px rgba(6,182,212,.08)}
     .form-input:focus + i.field-icon,.form-input:focus ~ i.field-icon{color:#06b6d4}
     .form-input.error{border-color:#ef4444;background:rgba(239,68,68,.04);box-shadow:0 0 0 3px rgba(239,68,68,.08);animation:shake .4s ease-out}
-
     .toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.25);cursor:pointer;padding:4px;font-size:14px;transition:color .3s}
     .toggle-pw:hover{color:rgba(255,255,255,.6)}
-
     .field-status{font-size:12px;margin-top:5px;min-height:18px;color:#ef4444;display:flex;align-items:center;gap:5px}
-
     .btn-login{width:100%;padding:14px;border-radius:14px;font-size:14px;font-weight:700;margin-top:8px}
-    .login-footer{text-align:center;margin-top:24px;font-size:13px;color:rgba(255,255,255,.35)}
-    .login-footer a{color:#06b6d4;text-decoration:none;font-weight:600}
-    .login-footer a:hover{color:#22d3ee}
-    .back-link{text-align:center;margin-top:14px}
-    .back-link a{color:rgba(255,255,255,.3);font-size:13px;text-decoration:none;transition:color .3s;display:inline-flex;align-items:center;gap:6px}
-    .back-link a:hover{color:#06b6d4}
-
+    .login-footer{text-align:center;margin-top:24px;font-size:13px;color:rgba(255,255,255,.35)}.login-footer a{color:#06b6d4;text-decoration:none;font-weight:600}.login-footer a:hover{color:#22d3ee}
+    .back-link{text-align:center;margin-top:14px}.back-link a{color:rgba(255,255,255,.3);font-size:13px;text-decoration:none;transition:color .3s;display:inline-flex;align-items:center;gap:6px}.back-link a:hover{color:#06b6d4}
     .spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
-
     .toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
     .toast{padding:14px 20px;border-radius:14px;font-size:13px;font-weight:500;backdrop-filter:blur(20px);pointer-events:all;animation:slideInRight .4s ease-out both;display:flex;align-items:center;gap:10px;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
     .toast.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
@@ -75,24 +54,17 @@
     .toast.info{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.3);color:#67e8f9}
     .toast.out{animation:slideOutRight .3s ease-in both}
     @keyframes slideOutRight{to{opacity:0;transform:translateX(40px)}}
-
     @media(max-width:480px){.login-card{margin:12px;padding:28px 20px}}
   </style>
 </head>
 <body>
   <canvas id="particles"></canvas>
   <div class="grid-overlay"></div>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
+  <div class="blob blob-1"></div><div class="blob blob-2"></div>
   <div class="toast-container" id="toastContainer"></div>
-
   <div class="login-card">
     <div class="login-logo"><img src="../zynex.jpg" alt="Zynex"></div>
-    <div class="login-header">
-      <h1>Selamat <span class="gradient-text">Datang</span></h1>
-      <p>Masuk ke akun Zynex Studio Anda</p>
-    </div>
-
+    <div class="login-header"><h1>Selamat <span class="gradient-text">Datang</span></h1><p>Masuk ke akun Zynex Studio Anda</p></div>
     <form id="loginForm" onsubmit="return false" novalidate>
       <div class="form-group">
         <label class="form-label">Username</label>
@@ -107,65 +79,45 @@
         <div class="form-input-wrap">
           <input type="password" id="loginPass" class="form-input" placeholder="Masukkan password" autocomplete="current-password" maxlength="64" style="padding-right:46px">
           <i class="fa-solid fa-lock field-icon"></i>
-          <button type="button" class="toggle-pw" onclick="togglePw()" aria-label="Tampilkan password"><i class="fa-solid fa-eye"></i></button>
+          <button type="button" class="toggle-pw" onclick="togglePw()"><i class="fa-solid fa-eye"></i></button>
         </div>
         <div class="field-status" id="loginPassStatus"></div>
       </div>
       <button type="button" class="btn-login btn-glow" id="btnLogin" onclick="doLogin()">Masuk</button>
     </form>
-
     <div class="login-footer">Belum punya akun? <a href="index.html">Daftar di sini</a></div>
     <div class="back-link"><a href="../"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a></div>
   </div>
-
   <script>
-    /* Particles */
-    (function(){const c=document.getElementById('particles'),ctx=c.getContext('2d');let w,h,pts=[];function resize(){w=c.width=innerWidth;h=c.height=innerHeight}resize();window.addEventListener('resize',resize);for(let i=0;i<40;i++)pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.5,dx:(Math.random()-.5)*.3,dy:(Math.random()-.5)*.3,o:Math.random()*.3+.1});function draw(){ctx.clearRect(0,0,w,h);pts.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(6,182,212,${p.o})`;ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(6,182,212,${.06*(1-d/120)})`;ctx.stroke()}}requestAnimationFrame(draw)}draw()})();
-
-    function showToast(msg,type='info',dur=4000){const c=document.getElementById('toastContainer'),t=document.createElement('div');t.className=`toast ${type}`;const ic={error:'fa-circle-exclamation',success:'fa-circle-check',info:'fa-circle-info'};t.innerHTML=`<i class="fa-solid ${ic[type]||ic.info}"></i><span>${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},dur)}
-    function togglePw(){const inp=document.getElementById('loginPass'),btn=inp.nextElementSibling.nextElementSibling;if(inp.type==='password'){inp.type='text';btn.innerHTML='<i class="fa-solid fa-eye-slash"></i>'}else{inp.type='password';btn.innerHTML='<i class="fa-solid fa-eye"></i>'}}
-
+    const DB_KEY='zynex_data_txt';function getDB(){try{return JSON.parse(localStorage.getItem(DB_KEY))||[]}catch{return[]}}
+    !function(){const c=document.getElementById('particles'),x=c.getContext('2d');let w,h,p=[];function r(){w=c.width=innerWidth;h=c.height=innerHeight}r();addEventListener('resize',r);for(let i=0;i<40;i++)p.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.5,dx:(Math.random()-.5)*.3,dy:(Math.random()-.5)*.3,o:Math.random()*.3+.1});!function d(){x.clearRect(0,0,w,h);p.forEach(v=>{v.x+=v.dx;v.y+=v.dy;if(v.x<0)v.x=w;if(v.x>w)v.x=0;if(v.y<0)v.y=h;if(v.y>h)v.y=0;x.beginPath();x.arc(v.x,v.y,v.r,0,Math.PI*2);x.fillStyle=`rgba(6,182,212,${v.o})`;x.fill()});requestAnimationFrame(d)}()}();
+    function showToast(msg,type='info',dur=4000){const c=document.getElementById('toastContainer'),t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<i class="fa-solid fa-circle-${type==='success'?'check':type==='error'?'exclamation':'info'}"></i><span>${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},dur)}
+    function togglePw(){const i=document.getElementById('loginPass'),b=i.parentElement.querySelector('.toggle-pw');if(i.type==='password'){i.type='text';b.innerHTML='<i class="fa-solid fa-eye-slash"></i>'}else{i.type='password';b.innerHTML='<i class="fa-solid fa-eye"></i>'}}
     let loggingIn=false;
-    async function doLogin(){
+    function doLogin(){
       if(loggingIn)return;loggingIn=true;
       const btn=document.getElementById('btnLogin'),user=document.getElementById('loginUser'),pass=document.getElementById('loginPass');
-      const uStatus=document.getElementById('loginUserStatus'),pStatus=document.getElementById('loginPassStatus');
+      const uS=document.getElementById('loginUserStatus'),pS=document.getElementById('loginPassStatus');
       btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Memproses...';
-      uStatus.textContent='';pStatus.textContent='';user.classList.remove('error');pass.classList.remove('error');
-
-      const username=user.value.trim(),password=pass.value;
-      let hasErr=false;
-
-      if(!username){uStatus.innerHTML='<i class="fa-solid fa-circle-xmark"></i> Username wajib diisi';user.classList.add('error');hasErr=true}
-      if(!password){pStatus.innerHTML='<i class="fa-solid fa-circle-xmark"></i> Password wajib diisi';pass.classList.add('error');hasErr=true}
-
-      if(hasErr){btn.disabled=false;btn.textContent='Masuk';loggingIn=false;return}
-
-      try{
-        const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
-        const d=await r.json();
-
-        if(d.success){
-          // Simpan session ke localStorage
-          localStorage.setItem('zynex_session',JSON.stringify({token:d.token,username:d.username,nama:d.nama,paket:d.paket,expires:Date.now()+86400000}));
-          showToast(`Selamat datang, ${d.nama}!`,'success');
-          // Redirect ke dashboard setelah 1 detik
-          setTimeout(()=>{window.location.href='dashboard.html'},1000);
-        }else{
-          if(d.field==='username'){uStatus.innerHTML='<i class="fa-solid fa-circle-xmark"></i> '+d.message;user.classList.add('error')}
-          else if(d.field==='password'){pStatus.innerHTML='<i class="fa-solid fa-circle-xmark"></i> '+d.message;pass.classList.add('error')}
-          else{showToast(d.message||'Login gagal','error')}
-        }
-      }catch(e){showToast('Gagal terhubung ke server.','error');console.error(e)}
+      uS.textContent='';pS.textContent='';user.classList.remove('error');pass.classList.remove('error');
+      const username=user.value.trim(),password=pass.value;let err=false;
+      if(!username){uS.innerHTML='<i class="fa-solid fa-circle-xmark"></i> Wajib diisi';user.classList.add('error');err=true}
+      if(!password){pS.innerHTML='<i class="fa-solid fa-circle-xmark"></i> Wajib diisi';pass.classList.add('error');err=true}
+      if(err){btn.disabled=false;btn.textContent='Masuk';loggingIn=false;return}
+      // Cek ke data.txt (localStorage)
+      const db=getDB();
+      const found=db.find(d=>d.username.toLowerCase()===username.toLowerCase());
+      if(!found){uS.innerHTML='<i class="fa-solid fa-circle-xmark"></i> Username tidak ditemukan';user.classList.add('error');btn.disabled=false;btn.textContent='Masuk';loggingIn=false;return}
+      if(found.password!==password){pS.innerHTML='<i class="fa-solid fa-circle-xmark"></i> Password salah';pass.classList.add('error');btn.disabled=false;btn.textContent='Masuk';loggingIn=false;return}
+      // Login berhasil
+      localStorage.setItem('zynex_session',JSON.stringify({username:found.username,nama:found.nama,paket:found.paket,expires:Date.now()+86400000}));
+      showToast(`Selamat datang, ${found.nama}!`,'success');
+      setTimeout(()=>{window.location.href='dashboard.html'},800);
       btn.disabled=false;btn.textContent='Masuk';loggingIn=false;
     }
-
-    // Enter key submit
     document.getElementById('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('loginPass').focus()});
     document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
-
-    // Cek jika sudah login, redirect
-    (function(){try{const s=JSON.parse(localStorage.getItem('zynex_session'));if(s&&s.token&&s.expires>Date.now())window.location.href='dashboard.html'}catch(e){}})();
+    !function(){try{const s=JSON.parse(localStorage.getItem('zynex_session'));if(s&&s.username&&s.expires>Date.now())window.location.href='dashboard.html'}catch(e){}}();
   </script>
 </body>
 </html>
