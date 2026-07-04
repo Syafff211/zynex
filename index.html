@@ -447,5 +447,34 @@
 
   <!-- Custom JS -->
   <script src="script.js"></script>
+    <!-- Smart Routing: Udah login = langsung dashboard, belum = daftar -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cari semua link yang mengarah ke auth (pilih paket)
+      const authLinks = document.querySelectorAll('a[href*="auth/?paket="]');
+      
+      authLinks.forEach(function(link) {
+        // Override click behavior
+        link.addEventListener('click', function(e) {
+          e.preventDefault(); // Cegah buka halaman daftar dulu
+          
+          // Cek apakah user sudah punya session login
+          try {
+            const session = JSON.parse(localStorage.getItem('zynex_session'));
+            if (session && session.username && session.expires > Date.now()) {
+              // SUDAH LOGIN -> langsung lempar ke dashboard
+              window.location.href = 'auth/dashboard.html';
+            } else {
+              // BELUM LOGIN -> buka halaman daftar seperti biasa
+              window.location.href = this.getAttribute('href');
+            }
+          } catch(err) {
+            // Terjadi error -> anggap belum login
+            window.location.href = this.getAttribute('href');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
