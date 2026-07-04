@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/jpeg" href="../zynex.jpg">
+  <title>Admin — Zynex Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0a0a1a;color:#e2e8f0;min-height:100vh}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a1a}::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,#06b6d4,#8b5cf6);border-radius:3px}
+    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(6,182,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 20%,transparent 70%)}
+    .blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+    .blob-1{width:500px;height:500px;background:rgba(59,130,246,.12);top:-10%;left:-10%;animation:bm1 20s ease-in-out infinite}
+    .blob-2{width:400px;height:400px;background:rgba(139,92,246,.1);bottom:-10%;right:-10%;animation:bm2 25s ease-in-out infinite}
+    @keyframes bm1{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,60px)}}
+    @keyframes bm2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-50px)}}
+    .gradient-text{background:linear-gradient(135deg,#06b6d4,#3b82f6,#8b5cf6,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .admin-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 20px 80px}
+    .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;animation:fadeInUp .5s ease-out both;flex-wrap:wrap;gap:12px}
+    .admin-header h1{font-size:24px;font-weight:800}
+    .admin-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:10px 18px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:6px;border:none}
+    .btn-primary{background:linear-gradient(135deg,#06b6d4,#3b82f6);color:#fff}.btn-primary:hover{box-shadow:0 0 20px rgba(6,182,212,.3);transform:translateY(-1px)}
+    .btn-danger{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5}.btn-danger:hover{background:rgba(239,68,68,.2)}
+    .btn-secondary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5)}.btn-secondary:hover{background:rgba(255,255,255,.08);color:#fff}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:28px}
+    .stat-card{border-radius:18px;padding:22px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);animation:fadeInUp .5s ease-out both}
+    .stat-card .num{font-size:28px;font-weight:800;margin-bottom:2px}.stat-card .lbl{font-size:12px;color:rgba(255,255,255,.35);font-weight:500}
+    .table-wrap{border-radius:18px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);overflow:hidden;animation:fadeInUp .5s .2s ease-out both}
+    .table-search{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .table-search input{flex:1;min-width:200px;padding:10px 14px 10px 38px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#fff;font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color .3s}
+    .table-search input:focus{border-color:rgba(6,182,212,.5)}
+    .table-search-wrap{position:relative;flex:1;min-width:200px}
+    .table-search-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:13px}
+    .table-search input{width:100%;padding-left:36px}
+    table{width:100%;border-collapse:collapse}
+    thead{background:rgba(255,255,255,.02)}
+    th{padding:12px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3)}
+    td{padding:14px 16px;font-size:13px;border-top:1px solid rgba(255,255,255,.03)}
+    tr:hover td{background:rgba(255,255,255,.015)}
+    .badge{display:inline-block;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700}
+    .badge-pro{background:rgba(168,85,247,.12);color:#c084fc}
+    .badge-starter{background:rgba(6,182,212,.12);color:#22d3ee}
+    .btn-sm{padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;border:none;display:inline-flex;align-items:center;gap:4px}
+    .btn-sm-danger{background:rgba(239,68,68,.1);color:#fca5a5}.btn-sm-danger:hover{background:rgba(239,68,68,.2)}
+    .btn-sm-wa{background:rgba(37,211,102,.1);color:#86efac}.btn-sm-wa:hover{background:rgba(37,211,102,.2)}
+    .empty{text-align:center;padding:60px 20px;color:rgba(255,255,255,.25);font-size:14px}
+    .empty i{font-size:40px;margin-bottom:12px;display:block;opacity:.5}
+    .back-link{text-align:center;margin-top:32px;animation:fadeInUp .5s .3s ease-out both}
+    .back-link a{color:rgba(255,255,255,.3);font-size:13px;text-decoration:none;transition:color .3s;display:inline-flex;align-items:center;gap:6px}.back-link a:hover{color:#06b6d4}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.show{display:flex}
+    .modal{background:#0f0f2a;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;max-width:400px;width:100%;animation:scaleIn .3s ease-out both}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+    .modal h3{font-size:18px;font-weight:700;margin-bottom:8px}.modal p{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.6}
+    .modal-btns{display:flex;gap:10px;justify-content:flex-end}
+    .toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+    .toast{padding:14px 20px;border-radius:14px;font-size:13px;font-weight:500;backdrop-filter:blur(20px);pointer-events:all;animation:slideInRight .4s ease-out both;display:flex;align-items:center;gap:10px;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+    .toast.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+    .toast.success{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#86efac}
+    .toast.out{animation:slideOutRight .3s ease-in both}
+    @keyframes slideOutRight{to{opacity:0;transform:translateX(40px)}}
+    @media(max-width:768px){.admin-wrap{padding:20px 14px 60px}table{font-size:12px}th,td{padding:10px 8px}.hide-mobile{display:none}}
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="blob blob-1"></div><div class="blob blob-2"></div>
+  <div class="toast-container" id="toastContainer"></div>
+  
+  <!-- Modal Konfirmasi Hapus -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+      <h3>Hapus User?</h3>
+      <p id="deleteModalText">Data user ini akan dihapus permanen dari data.txt.</p>
+      <div class="modal-btns">
+        <button class="btn btn-secondary" onclick="closeDeleteModal()">Batal</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn" onclick="confirmDelete()">Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <h1><i class="fa-solid fa-shield-halved" style="margin-right:8px;color:#06b6d4"></i> <span class="gradient-text">Admin Panel</span></h1>
+      <div class="admin-actions">
+        <button class="btn btn-secondary" onclick="exportTXT()"><i class="fa-solid fa-download"></i> Export data.txt</button>
+        <button class="btn btn-secondary" onclick="importTXT()"><i class="fa-solid fa-upload"></i> Import data.txt</button>
+        <input type="file" id="importFile" accept=".txt" style="display:none" onchange="handleImport(event)">
+        <button class="btn btn-danger" onclick="clearAll()"><i class="fa-solid fa-trash"></i> Hapus Semua</button>
+      </div>
+    </div>
+
+    <div class="stats" id="statsGrid"></div>
+
+    <div class="table-wrap">
+      <div class="table-search">
+        <div class="table-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Cari username, nama, email..." oninput="renderTable()">
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th class="hide-mobile">Nama</th>
+              <th class="hide-mobile">WhatsApp</th>
+              <th class="hide-mobile">Email</th>
+              <th>Paket</th>
+              <th class="hide-mobile">Tanggal</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="emptyState" style="display:none">
+        <i class="fa-solid fa-database"></i>
+        Belum ada data user yang terdaftar.
+      </div>
+    </div>
+
+    <div class="back-link"><a href="../"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a></div>
+  </div>
+
+  <script>
+    const DB_KEY='zynex_data_txt';
+    function getDB(){try{return JSON.parse(localStorage.getItem(DB_KEY))||[]}catch{return[]}}
+    function saveDB(d){localStorage.setItem(DB_KEY,JSON.stringify(d))}
+    let deleteTarget=null;
+
+    !function(){const c=document.getElementById('particles'),x=c.getContext('2d');let w,h,p=[];function r(){w=c.width=innerWidth;h=c.height=innerHeight}r();addEventListener('resize',r);for(let i=0;i<30;i++)p.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+.4,dx:(Math.random()-.5)*.2,dy:(Math.random()-.5)*.2,o:Math.random()*.2+.08});!function d(){x.clearRect(0,0,w,h);p.forEach(v=>{v.x+=v.dx;v.y+=v.dy;if(v.x<0)v.x=w;if(v.x>w)v.x=0;if(v.y<0)v.y=h;if(v.y>h)v.y=0;x.beginPath();x.arc(v.x,v.y,v.r,0,Math.PI*2);x.fillStyle=`rgba(6,182,212,${v.o})`;x.fill()});requestAnimationFrame(d)}()}();
+
+    function showToast(msg,type='success',dur=3000){const c=document.getElementById('toastContainer'),t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<i class="fa-solid fa-circle-${type==='success'?'check':'exclamation'}"></i><span>${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},dur)}
+
+    function renderStats(){
+      const db=getDB();
+      const total=db.length;
+      const pro=db.filter(d=>d.paket==='pro').length;
+      const starter=total-pro;
+      const today=db.filter(d=>{const d1=new Date(d.waktu).toDateString(),d2=new Date().toDateString();return d1===d2}).length;
+      document.getElementById('statsGrid').innerHTML=`
+        <div class="stat-card" style="animation-delay:.05s"><div class="num gradient-text">${total}</div><div class="lbl">Total User</div></div>
+        <div class="stat-card" style="animation-delay:.1s"><div class="num" style="color:#a855f7">${pro}</div><div class="lbl">Paket Pro</div></div>
+        <div class="stat-card" style="animation-delay:.15s"><div class="num" style="color:#06b6d4">${starter}</div><div class="lbl">Paket Starter</div></div>
+        <div class="stat-card" style="animation-delay:.2s"><div class="num" style="color:#22c55e">${today}</div><div class="lbl">Hari Ini</div></div>`;
+    }
+
+    function renderTable(){
+      const db=getDB();
+      const q=document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered=q?db.filter(d=>d.username.toLowerCase().includes(q)||d.nama.toLowerCase().includes(q)||d.email.toLowerCase().includes(q)||d.whatsapp.includes(q)):db;
+      const tbody=document.getElementById('tableBody');
+      const empty=document.getElementById('emptyState');
+      if(!filtered.length){tbody.innerHTML='';empty.style.display='block';return}
+      empty.style.display='none';
+      tbody.innerHTML=filtered.map((d,i)=>{
+        const isPro=d.paket==='pro';
+        const date=new Date(d.waktu).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+        return `<tr>
+          <td style="color:rgba(255,255,255,.25)">${i+1}</td>
+          <td style="font-weight:600;color:#06b6d4">@${d.username}</td>
+          <td class="hide-mobile">${d.nama}</td>
+          <td class="hide-mobile">${d.whatsapp}</td>
+          <td class="hide-mobile" style="color:rgba(255,255,255,.5)">${d.email}</td>
+          <td><span class="badge ${isPro?'badge-pro':'badge-starter'}">${isPro?'Pro':'Starter'}</span></td>
+          <td class="hide-mobile" style="color:rgba(255,255,255,.35)">${date}</td>
+          <td>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <a href="https://wa.me/${d.whatsapp.replace(/^0/,'62')}" target="_blank" class="btn-sm btn-sm-wa"><i class="fa-brands fa-whatsapp"></i></a>
+              <button class="btn-sm btn-sm-danger" onclick="openDeleteModal('${d.username}')"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>`}).join('');
+    }
+
+    function openDeleteModal(u){deleteTarget=u;document.getElementById('deleteModalText').textContent=`Hapus user @${u} dari data.txt?`;document.getElementById('deleteModal').classList.add('show')}
+    function closeDeleteModal(){document.getElementById('deleteModal').classList.remove('show');deleteTarget=null}
+    function confirmDelete(){
+      if(!deleteTarget)return;
+      let db=getDB();db=db.filter(d=>d.username.toLowerCase()!==deleteTarget.toLowerCase());saveDB(db);
+      closeDeleteModal();renderStats();renderTable();showToast(`@${deleteTarget} dihapus`);
+    }
+
+    function exportTXT(){
+      const db=getDB();if(!db.length){showToast('Tidak ada data untuk di-export','error');return}
+      let txt='========================================\n  ZYNEX STUDIO - DATA SEMUA USER\n========================================\n\n';
+      db.forEach((d,i)=>{
+        const pkg=d.paket==='pro'?'Pro (20K)':'Starter (15K)';
+        const date=new Date(d.waktu).toLocaleString('id-ID');
+        txt+=`--- User #${i+1} ---\nNama       : ${d.nama}\nUsername   : ${d.username}\nWhatsApp   : ${d.whatsapp}\nEmail      : ${d.email}\nPaket      : ${pkg}\nWaktu      : ${date}\n\n`;
+      });
+      txt+='========================================\nTotal: '+db.length+' user\n========================================\n';
+      const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.txt';a.click();URL.revokeObjectURL(a.href);
+      showToast('data.txt berhasil di-export');
+    }
+
+    function importTXT(){document.getElementById('importFile').click()}
+    function handleImport(e){
+      const file=e.target.files[0];if(!file)return;
+      const reader=new FileReader();
+      reader.onload=function(ev){
+        try{
+          const text=ev.target.result;
+          const blocks=text.split(/---\s*User\s*#\d+\s*---/).filter(b=>b.trim());
+          let imported=0;const db=getDB();
+          blocks.forEach(block=>{
+            const get=(label)=>{const m=block.match(new RegExp(label+'\\s*:\\s*(.+)'));return m?m[1].trim():''};
+            const nama=get('Nama'),username=get('Username'),whatsapp=get('WhatsApp'),email=get('Email'),paketRaw=get('Paket'),waktu=get('Waktu');
+            if(!username)return;
+            if(db.some(d=>d.username.toLowerCase()===username.toLowerCase()))return;
+            const paket=paketRaw.toLowerCase().includes('pro')?'pro':'starter';
+            db.push({nama,username,whatsapp,email,paket,password:'',waktu:waktu?new Date(waktu).toISOString():new Date().toISOString()});
+            imported++;
+          });
+          saveDB(db);renderStats();renderTable();
+          showToast(`${imported} user berhasil di-import dari data.txt`);
+        }catch(err){showToast('Format file tidak valid','error')}
+        e.target.value='';
+      };
+      reader.readAsText(file);
+    }
+
+    function clearAll(){
+      const db=getDB();if(!db.length){showToast('Data sudah kosong','error');return}
+      // Pakai konfirmasi modal
+      deleteTarget='__ALL__';
+      document.getElementById('deleteModalText').textContent=`Hapus SEMUA ${db.length} user dari data.txt? Tindakan ini tidak bisa dibatalkan.`;
+      document.getElementById('confirmDeleteBtn').onclick=function(){
+        if(deleteTarget==='__ALL__'){saveDB([]);closeDeleteModal();renderStats();renderTable();showToast('Semua data dihapus');deleteTarget=null;document.getElementById('confirmDeleteBtn').onclick=confirmDelete;}
+      };
+      document.getElementById('deleteModal').classList.add('show');
+    }
+
+    renderStats();renderTable();
+  </script>
+</body>
+</html>
