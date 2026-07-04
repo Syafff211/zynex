@@ -8,11 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0a0a1a;color:#e2e8f0;min-height:100vh}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0a0a1a;color:#e2e8f0;min-height:100vh}
     ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a1a}::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,#06b6d4,#8b5cf6);border-radius:3px}
-
     #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
     .grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(6,182,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 20%,transparent 70%)}
     .blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
@@ -22,19 +19,15 @@
     @keyframes bm1{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,60px)}}
     @keyframes bm2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-50px)}}
     @keyframes bm3{0%,100%{transform:translate(0,0)}33%{transform:translate(-40px,30px)}66%{transform:translate(30px,-20px)}}
-
     .gradient-text{background:linear-gradient(135deg,#06b6d4,#3b82f6,#8b5cf6,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .glass{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06)}
-    .divider-gradient{height:1px;background:linear-gradient(90deg,transparent,rgba(6,182,212,.3),rgba(139,92,246,.3),transparent)}
     .popular-glow{box-shadow:0 0 40px rgba(6,182,212,.15),0 0 80px rgba(139,92,246,.1)}
-
     .btn-glow{position:relative;overflow:hidden;background:linear-gradient(135deg,#06b6d4,#3b82f6);transition:all .3s;cursor:pointer;border:none;color:#fff;font-family:'Inter',sans-serif}
     .btn-glow:hover{box-shadow:0 0 25px rgba(6,182,212,.4),0 0 50px rgba(59,130,246,.2);transform:translateY(-2px)}
     .btn-glow:active{transform:translateY(0)}
     .btn-glow::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(transparent,rgba(255,255,255,.1),transparent);transform:rotate(45deg) translateY(-100%);transition:transform .6s}
     .btn-glow:hover::after{transform:rotate(45deg) translateY(100%)}
     .btn-glow:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
-
     @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
     @keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
     @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(6,182,212,.3)}50%{box-shadow:0 0 20px 4px rgba(6,182,212,.15)}}
@@ -43,30 +36,26 @@
     @keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
     @keyframes successPulse{0%{transform:scale(0);opacity:0}50%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
     @keyframes spin{to{transform:rotate(360deg)}}
-
     .auth-wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:40px 20px 80px}
     .back-btn{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:14px;text-decoration:none;transition:all .3s;margin-bottom:36px;animation:fadeInUp .6s ease-out both}
     .back-btn:hover{color:#06b6d4;transform:translateX(-4px)}
     .auth-header{text-align:center;margin-bottom:40px;animation:fadeInUp .6s .05s ease-out both}
     .auth-header h1{font-size:clamp(24px,5vw,36px);font-weight:800;line-height:1.15;margin-bottom:8px}
     .auth-header p{color:rgba(255,255,255,.4);font-size:14px}
-
     .steps{display:flex;justify-content:center;align-items:flex-start;margin-bottom:44px;animation:fadeInUp .6s .1s ease-out both}
     .step-circle{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:2px solid rgba(255,255,255,.08);color:rgba(255,255,255,.25);transition:all .4s;flex-shrink:0;position:relative;background:#0a0a1a}
     .step-circle.active{border-color:#06b6d4;color:#06b6d4;background:rgba(6,182,212,.06);animation:pulseGlow 2s infinite}
     .step-circle.done{border-color:#22c55e;color:#fff;background:#22c55e}
     .step-circle.done i{animation:checkPop .4s ease-out both}
     .step-line{width:56px;height:2px;background:rgba(255,255,255,.06);transition:background .5s;margin-top:18px}
-    .step-line.done{background:linear-gradient(90deg,#22c55e,#22c55e)}
+    .step-line.done{background:#22c55e}
     .step-line.active{background:linear-gradient(90deg,#22c55e,#06b6d4)}
     .step-label{position:absolute;top:46px;font-size:10px;font-weight:600;white-space:nowrap;color:rgba(255,255,255,.25);transition:color .4s;letter-spacing:.3px}
     .step-circle.active .step-label{color:#06b6d4}
     .step-circle.done .step-label{color:#22c55e}
-
     .panel-container{position:relative;min-height:480px}
     .panel{position:absolute;top:0;left:0;width:100%;opacity:0;pointer-events:none;transform:translateY(16px);transition:all .45s cubic-bezier(.16,1,.3,1)}
     .panel.active{opacity:1;pointer-events:all;transform:translateY(0);position:relative}
-
     .pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:540px){.pkg-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
     .pkg-card{border-radius:20px;padding:28px 24px;cursor:pointer;transition:all .35s;position:relative;overflow:hidden;background:rgba(255,255,255,.02);border:1.5px solid rgba(255,255,255,.06)}
@@ -83,7 +72,6 @@
     .pkg-features{list-style:none;display:flex;flex-direction:column;gap:10px}
     .pkg-features li{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.7)}
     .pkg-features li i{font-size:14px;flex-shrink:0}
-
     .form-group{margin-bottom:18px}
     .form-label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:rgba(255,255,255,.7)}
     .form-input-wrap{position:relative}
@@ -94,24 +82,16 @@
     .form-input:focus + i.field-icon,.form-input:focus ~ i.field-icon{color:#06b6d4}
     .form-input.error{border-color:#ef4444;background:rgba(239,68,68,.04);box-shadow:0 0 0 3px rgba(239,68,68,.08);animation:shake .4s ease-out}
     .form-input.valid{border-color:#22c55e;background:rgba(34,197,94,.04)}
-    .form-input:disabled{opacity:.5;cursor:not-allowed}
-
     .toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.25);cursor:pointer;padding:4px;font-size:14px;transition:color .3s}
     .toggle-pw:hover{color:rgba(255,255,255,.6)}
-
     .field-status{font-size:12px;margin-top:5px;min-height:18px;transition:all .3s;display:flex;align-items:center;gap:5px}
-    .field-status.error{color:#ef4444}
-    .field-status.success{color:#22c55e}
-    .field-status.checking{color:#f59e0b}
+    .field-status.error{color:#ef4444}.field-status.success{color:#22c55e}.field-status.checking{color:#f59e0b}
     .form-hint{font-size:11px;color:rgba(255,255,255,.22);margin-top:3px}
-
     .btn-row{display:flex;gap:12px;margin-top:24px}
     .btn-back{flex:1;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
     .btn-back:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.15)}
     .btn-next{flex:2;padding:14px;border-radius:14px;font-size:14px;font-weight:700;letter-spacing:.3px}
-
     .selected-pkg-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;font-size:13px;font-weight:600;margin-bottom:22px}
-
     .success-box{text-align:center;padding:40px 20px;animation:scaleIn .5s ease-out both}
     .success-icon{width:80px;height:80px;border-radius:50%;background:rgba(34,197,94,.1);border:2px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;animation:successPulse .6s ease-out both}
     .success-icon i{font-size:36px;color:#22c55e}
@@ -119,9 +99,7 @@
     .success-box p{color:rgba(255,255,255,.4);font-size:14px;margin-bottom:8px;line-height:1.6}
     .success-detail{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);color:#06b6d4;font-size:12px;font-weight:600;margin:3px}
     .success-details{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:20px 0 28px}
-
     .spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
-
     .toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
     .toast{padding:14px 20px;border-radius:14px;font-size:13px;font-weight:500;backdrop-filter:blur(20px);pointer-events:all;animation:slideInRight .4s ease-out both;display:flex;align-items:center;gap:10px;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
     .toast.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
@@ -129,7 +107,6 @@
     .toast.info{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.3);color:#67e8f9}
     .toast.out{animation:slideOutRight .3s ease-in both}
     @keyframes slideOutRight{to{opacity:0;transform:translateX(40px)}}
-
     .login-link{text-align:center;margin-top:20px;font-size:13px;color:rgba(255,255,255,.35)}
     .login-link a{color:#06b6d4;text-decoration:none;font-weight:600;transition:color .3s}
     .login-link a:hover{color:#22d3ee}
@@ -138,14 +115,11 @@
 <body>
   <canvas id="particles"></canvas>
   <div class="grid-overlay"></div>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
+  <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
   <div class="toast-container" id="toastContainer"></div>
 
   <div class="auth-wrap">
     <a href="../" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
-
     <div class="auth-header">
       <h1>Buat <span class="gradient-text">Akun</span></h1>
       <p>Daftar untuk memilih paket dan mulai project Anda</p>
@@ -195,7 +169,7 @@
         </div>
       </div>
 
-      <!-- PANEL 2: Form Data Diri -->
+      <!-- PANEL 2: Form -->
       <div class="panel" id="panel2">
         <div id="selectedPkgBadge" class="selected-pkg-badge" style="background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);color:#06b6d4">
           <i class="fa-solid fa-tag"></i><span id="selectedPkgText">Paket Starter — 15K</span>
@@ -240,17 +214,16 @@
             <div class="form-input-wrap">
               <input type="password" id="inputPassword" class="form-input" placeholder="Min 6 karakter" autocomplete="new-password" maxlength="64" style="padding-right:46px">
               <i class="fa-solid fa-lock field-icon"></i>
-              <button type="button" class="toggle-pw" onclick="togglePw('inputPassword',this)" aria-label="Tampilkan password"><i class="fa-solid fa-eye"></i></button>
+              <button type="button" class="toggle-pw" onclick="togglePw('inputPassword',this)"><i class="fa-solid fa-eye"></i></button>
             </div>
             <div class="field-status" id="statusPassword"></div>
-            <div class="form-hint">Min 6 karakter, disarankan campuran huruf & angka</div>
           </div>
           <div class="form-group">
             <label class="form-label">Konfirmasi Password</label>
             <div class="form-input-wrap">
               <input type="password" id="inputConfirm" class="form-input" placeholder="Ulangi password" autocomplete="new-password" maxlength="64" style="padding-right:46px">
               <i class="fa-solid fa-lock field-icon"></i>
-              <button type="button" class="toggle-pw" onclick="togglePw('inputConfirm',this)" aria-label="Tampilkan password"><i class="fa-solid fa-eye"></i></button>
+              <button type="button" class="toggle-pw" onclick="togglePw('inputConfirm',this)"><i class="fa-solid fa-eye"></i></button>
             </div>
             <div class="field-status" id="statusConfirm"></div>
           </div>
@@ -287,81 +260,110 @@
   </div>
 
   <script>
-    const API_BASE = '/api';
-    let selectedPkg = null, currentStep = 1, usernameTimer = null, isSubmitting = false;
+    /* ==================== DATABASE (LOCALSTORAGE -> data.txt) ==================== */
+    const DB_KEY = 'zynex_data_txt';
+    function getDB() { try { return JSON.parse(localStorage.getItem(DB_KEY)) || []; } catch { return []; } }
+    function saveDB(data) { localStorage.setItem(DB_KEY, JSON.stringify(data)); }
+    function isUsernameTaken(u) { return getDB().some(d => d.username.toLowerCase() === u.toLowerCase()); }
+
+    /* ==================== UI STATE ==================== */
+    let selectedPkg = null, currentStep = 1, isSubmitting = false;
+    const $=id=>document.getElementById(id);
 
     /* Particles */
-    (function(){const c=document.getElementById('particles'),ctx=c.getContext('2d');let w,h,pts=[];function resize(){w=c.width=innerWidth;h=c.height=innerHeight}resize();window.addEventListener('resize',resize);for(let i=0;i<50;i++)pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.5,dx:(Math.random()-.5)*.3,dy:(Math.random()-.5)*.3,o:Math.random()*.35+.1});function draw(){ctx.clearRect(0,0,w,h);pts.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(6,182,212,${p.o})`;ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(6,182,212,${.06*(1-d/120)})`;ctx.stroke()}}requestAnimationFrame(draw)}draw()})();
+    !function(){const c=$('particles'),x=c.getContext('2d');let w,h,p=[];function r(){w=c.width=innerWidth;h=c.height=innerHeight}r();addEventListener('resize',r);for(let i=0;i<50;i++)p.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.5,dx:(Math.random()-.5)*.3,dy:(Math.random()-.5)*.3,o:Math.random()*.35+.1});!function d(){x.clearRect(0,0,w,h);p.forEach(v=>{v.x+=v.dx;v.y+=v.dy;if(v.x<0)v.x=w;if(v.x>w)v.x=0;if(v.y<0)v.y=h;if(v.y>h)v.y=0;x.beginPath();x.arc(v.x,v.y,v.r,0,Math.PI*2);x.fillStyle=`rgba(6,182,212,${v.o})`;x.fill()});requestAnimationFrame(d)}()}();
 
     /* Toast */
-    function showToast(msg,type='info',dur=4000){const c=document.getElementById('toastContainer'),t=document.createElement('div');t.className=`toast ${type}`;const ic={error:'fa-circle-exclamation',success:'fa-circle-check',info:'fa-circle-info'};t.innerHTML=`<i class="fa-solid ${ic[type]||ic.info}"></i><span>${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},dur)}
-
-    /* Toggle Password */
-    function togglePw(id,btn){const inp=document.getElementById(id);if(inp.type==='password'){inp.type='text';btn.innerHTML='<i class="fa-solid fa-eye-slash"></i>'}else{inp.type='password';btn.innerHTML='<i class="fa-solid fa-eye"></i>'}}
+    function showToast(msg,type='info',dur=4000){const c=$('toastContainer'),t=document.createElement('div');t.className=`toast ${type}`;const ic={error:'fa-circle-exclamation',success:'fa-circle-check',info:'fa-circle-info'};t.innerHTML=`<i class="fa-solid ${ic[type]||ic.info}"></i><span>${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},dur)}
+    function togglePw(id,btn){const i=$(id);if(i.type==='password'){i.type='text';btn.innerHTML='<i class="fa-solid fa-eye-slash"></i>'}else{i.type='password';btn.innerHTML='<i class="fa-solid fa-eye"></i>'}}
 
     /* Steps */
     function goToStep(step){
-      if(step===2&&!selectedPkg)return;if(step===3)return;
-      currentStep=step;
-      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-      document.getElementById('panel'+step).classList.add('active');
-      const labels=['','Pilih Paket','Data Diri','Selesai'];
-      for(let i=1;i<=3;i++){const c=document.getElementById('stepCircle'+i);c.classList.remove('active','done');if(i<step){c.classList.add('done');c.innerHTML=`<i class="fa-solid fa-check text-xs"></i><span class="step-label">${labels[i]}</span>`}else if(i===step){c.classList.add('active');c.innerHTML=`${i}<span class="step-label">${labels[i]}</span>`}else{c.innerHTML=`${i}<span class="step-label">${labels[i]}</span>`}}
-      document.getElementById('stepLine1').className='step-line'+(step>1?(step>2?' done':' active'):'');
-      document.getElementById('stepLine2').className='step-line'+(step>2?' done':'');
-      if(step===2&&selectedPkg){const info=selectedPkg==='pro'?{l:'Paket Pro — 20K',c:'#a855f7',bg:'rgba(168,85,247,.08)',bd:'rgba(168,85,247,.2)'}:{l:'Paket Starter — 15K',c:'#06b6d4',bg:'rgba(6,182,212,.08)',bd:'rgba(6,182,212,.2)'};const b=document.getElementById('selectedPkgBadge');b.style.background=info.bg;b.style.borderColor=info.bd;b.style.color=info.c;document.getElementById('selectedPkgText').textContent=info.l}
+      if(step===2&&!selectedPkg)return;if(step===3)return;currentStep=step;
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));$('panel'+step).classList.add('active');
+      const l=['','Pilih Paket','Data Diri','Selesai'];
+      for(let i=1;i<=3;i++){const c=$('stepCircle'+i);c.classList.remove('active','done');if(i<step){c.classList.add('done');c.innerHTML=`<i class="fa-solid fa-check text-xs"></i><span class="step-label">${l[i]}</span>`}else if(i===step){c.classList.add('active');c.innerHTML=`${i}<span class="step-label">${l[i]}</span>`}else{c.innerHTML=`${i}<span class="step-label">${l[i]}</span>`}}
+      $('stepLine1').className='step-line'+(step>1?(step>2?' done':' active'):'');
+      $('stepLine2').className='step-line'+(step>2?' done':'');
+      if(step===2&&selectedPkg){const info=selectedPkg==='pro'?{l:'Paket Pro — 20K',c:'#a855f7',bg:'rgba(168,85,247,.08)',bd:'rgba(168,85,247,.2)'}:{l:'Paket Starter — 15K',c:'#06b6d4',bg:'rgba(6,182,212,.08)',bd:'rgba(6,182,212,.2)'};const b=$('selectedPkgBadge');b.style.background=info.bg;b.style.borderColor=info.bd;b.style.color=info.c;$('selectedPkgText').textContent=info.l}
     }
 
-    /* Paket */
-    function selectPkg(pkg){selectedPkg=pkg;document.querySelectorAll('.pkg-card').forEach(c=>c.classList.remove('selected'));document.querySelector(`.pkg-card[data-pkg="${pkg}"]`).classList.add('selected');document.getElementById('btnToStep2').disabled=false}
-
-    /* Auto-select dari URL */
-    (function(){const p=new URLSearchParams(location.search).get('paket');if(p==='starter'||p==='pro')selectPkg(p)})();
+    function selectPkg(pkg){selectedPkg=pkg;document.querySelectorAll('.pkg-card').forEach(c=>c.classList.remove('selected'));document.querySelector(`.pkg-card[data-pkg="${pkg}"]`).classList.add('selected');$('btnToStep2').disabled=false}
+    !function(){const p=new URLSearchParams(location.search).get('paket');if(p==='starter'||p==='pro')selectPkg(p)}();
 
     /* Validasi */
-    const $=id=>document.getElementById(id);
-    const inputNama=$('inputNama'),inputUsername=$('inputUsername'),inputWA=$('inputWA'),inputEmail=$('inputEmail'),inputPassword=$('inputPassword'),inputConfirm=$('inputConfirm');
+    function setStatus(f,html,t){const m={Nama:'statusNama',Username:'statusUsername',WA:'statusWA',Email:'statusEmail',Password:'statusPassword',Confirm:'statusConfirm'};const e=$(m[f]);e.innerHTML=html;e.className='field-status'+(t?' '+t:'')}
 
-    function setStatus(field,html,type){const map={Nama:'statusNama',Username:'statusUsername',WA:'statusWA',Email:'statusEmail',Password:'statusPassword',Confirm:'statusConfirm'};const el=$(map[field]);el.innerHTML=html;el.className='field-status'+(type?' '+type:'')}
+    $('inputNama').addEventListener('input',function(){const v=this.value.trim();if(!v){setStatus('Nama','','');this.classList.remove('error','valid')}else if(v.length<2){setStatus('Nama','Nama terlalu pendek','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Nama','','');this.classList.remove('error');this.classList.add('valid')}checkReady()});
 
-    inputNama.addEventListener('input',function(){const v=this.value.trim();if(!v){setStatus('Nama','','');this.classList.remove('error','valid')}else if(v.length<2){setStatus('Nama','Nama terlalu pendek','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Nama','','');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
+    $('inputUsername').addEventListener('input',function(){
+      const v=this.value.trim();
+      if(!v){setStatus('Username','','');this.classList.remove('error','valid');this.dataset.ok='';checkReady();return}
+      if(!/^[a-z0-9_]+$/.test(v)){setStatus('Username','Hanya huruf kecil, angka, dan underscore','error');this.classList.add('error');this.classList.remove('valid');this.dataset.ok='';checkReady();return}
+      if(v.length<3){setStatus('Username','Min 3 karakter','error');this.classList.add('error');this.classList.remove('valid');this.dataset.ok='';checkReady();return}
+      // Cek ke localStorage (data.txt)
+      if(isUsernameTaken(v)){setStatus('Username','<i class="fa-solid fa-circle-xmark"></i> Sudah digunakan','error');this.classList.add('error');this.classList.remove('valid');this.dataset.ok='false'}
+      else{setStatus('Username','<i class="fa-solid fa-circle-check"></i> Tersedia','success');this.classList.remove('error');this.classList.add('valid');this.dataset.ok='true'}
+      checkReady();
+    });
 
-    inputUsername.addEventListener('input',function(){const v=this.value.trim();clearTimeout(usernameTimer);if(!v){setStatus('Username','','');this.classList.remove('error','valid');this.dataset.available='';checkFormReady();return}if(!/^[a-z0-9_]+$/.test(v)){setStatus('Username','Hanya huruf kecil, angka, dan underscore','error');this.classList.add('error');this.classList.remove('valid');checkFormReady();return}if(v.length<3){setStatus('Username','Min 3 karakter','error');this.classList.add('error');this.classList.remove('valid');checkFormReady();return}this.classList.remove('error','valid');setStatus('Username','<span class="spinner" style="width:12px;height:12px;border-width:2px"></span> Mengecek...','checking');usernameTimer=setTimeout(()=>checkUsername(v),500)});
+    $('inputWA').addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'');const v=this.value.trim();if(!v){setStatus('WA','','');this.classList.remove('error','valid')}else if(!/^0[0-9]{8,13}$/.test(v)){setStatus('WA','Format: 08xxxxxxxxxx','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('WA','','');this.classList.remove('error');this.classList.add('valid')}checkReady()});
 
-    async function checkUsername(u){try{const r=await fetch(`${API_BASE}/check-username?u=${encodeURIComponent(u)}`),d=await r.json();if(d.available){setStatus('Username','<i class="fa-solid fa-circle-check"></i> Tersedia','success');inputUsername.classList.remove('error');inputUsername.classList.add('valid');inputUsername.dataset.available='true'}else{setStatus('Username','<i class="fa-solid fa-circle-xmark"></i> Sudah digunakan','error');inputUsername.classList.add('error');inputUsername.classList.remove('valid');inputUsername.dataset.available='false'}}catch(e){setStatus('Username','<i class="fa-solid fa-circle-check"></i> Tersedia','success');inputUsername.classList.remove('error');inputUsername.classList.add('valid');inputUsername.dataset.available='true'}checkFormReady()}
+    $('inputEmail').addEventListener('input',function(){const v=this.value.trim();if(!v){setStatus('Email','','');this.classList.remove('error','valid')}else if(!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(v)){setStatus('Email','<i class="fa-solid fa-circle-xmark"></i> Hanya @gmail.com','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Email','<i class="fa-solid fa-circle-check"></i> Valid','success');this.classList.remove('error');this.classList.add('valid')}checkReady()});
 
-    inputWA.addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'');const v=this.value.trim();if(!v){setStatus('WA','','');this.classList.remove('error','valid')}else if(!/^0[0-9]{8,13}$/.test(v)){setStatus('WA','Format: 08xxxxxxxxxx (10-14 digit)','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('WA','','');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
+    $('inputPassword').addEventListener('input',function(){const v=this.value;if(!v){setStatus('Password','','');this.classList.remove('error','valid')}else if(v.length<6){setStatus('Password','Min 6 karakter','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Password','<i class="fa-solid fa-circle-check"></i> Kuat','success');this.classList.remove('error');this.classList.add('valid')}if($('inputConfirm').value)$('inputConfirm').dispatchEvent(new Event('input'));checkReady()});
 
-    inputEmail.addEventListener('input',function(){const v=this.value.trim();if(!v){setStatus('Email','','');this.classList.remove('error','valid')}else if(!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(v)){setStatus('Email','<i class="fa-solid fa-circle-xmark"></i> Hanya @gmail.com','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Email','<i class="fa-solid fa-circle-check"></i> Valid','success');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
+    $('inputConfirm').addEventListener('input',function(){const v=this.value;if(!v){setStatus('Confirm','','');this.classList.remove('error','valid')}else if(v!==($('inputPassword').value)){setStatus('Confirm','<i class="fa-solid fa-circle-xmark"></i> Password tidak cocok','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Confirm','<i class="fa-solid fa-circle-check"></i> Cocok','success');this.classList.remove('error');this.classList.add('valid')}checkReady()});
 
-    inputPassword.addEventListener('input',function(){const v=this.value;if(!v){setStatus('Password','','');this.classList.remove('error','valid')}else if(v.length<6){setStatus('Password','Min 6 karakter','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Password','<i class="fa-solid fa-circle-check"></i> Kuat','success');this.classList.remove('error');this.classList.add('valid')}if(inputConfirm.value)inputConfirm.dispatchEvent(new Event('input'));checkFormReady()});
-
-    inputConfirm.addEventListener('input',function(){const v=this.value;if(!v){setStatus('Confirm','','');this.classList.remove('error','valid')}else if(v!==inputPassword.value){setStatus('Confirm','<i class="fa-solid fa-circle-xmark"></i> Password tidak cocok','error');this.classList.add('error');this.classList.remove('valid')}else{setStatus('Confirm','<i class="fa-solid fa-circle-check"></i> Cocok','success');this.classList.remove('error');this.classList.add('valid')}checkFormReady()});
-
-    [inputNama,inputUsername,inputWA,inputEmail,inputPassword,inputConfirm].forEach(el=>el.addEventListener('blur',()=>el.dispatchEvent(new Event('input'))));
-
-    function checkFormReady(){const ok=inputNama.value.trim().length>=2&&inputUsername.dataset.available==='true'&&/^0[0-9]{8,13}$/.test(inputWA.value.trim())&&/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(inputEmail.value.trim())&&inputPassword.value.length>=6&&inputConfirm.value===inputPassword.value&&inputConfirm.value.length>0;$('btnSubmit').disabled=!ok}
+    function checkReady(){const ok=$('inputNama').value.trim().length>=2&&$('inputUsername').dataset.ok==='true'&&/^0[0-9]{8,13}$/.test($('inputWA').value.trim())&&/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test($('inputEmail').value.trim())&&$('inputPassword').value.length>=6&&$('inputConfirm').value===$('inputPassword').value&&$('inputConfirm').value.length>0;$('btnSubmit').disabled=!ok}
 
     /* Submit */
     async function submitForm(){
       if(isSubmitting)return;isSubmitting=true;
       const btn=$('btnSubmit');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Memproses...';
-      const payload={nama:inputNama.value.trim(),username:inputUsername.value.trim(),whatsapp:inputWA.value.trim(),email:inputEmail.value.trim(),password:inputPassword.value,paket:selectedPkg,waktu:new Date().toISOString()};
-      try{
-        const r=await fetch(`${API_BASE}/register`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-        const d=await r.json();
-        if(d.success){
-          showToast('Akun berhasil dibuat!','success');
-          $('successNama').textContent=payload.nama;$('successUsername').textContent=payload.username;$('successWA').textContent=payload.whatsapp;$('successEmail').textContent=payload.email;
-          const pl=payload.paket==='pro'?'Paket Pro':'Paket Starter';$('successPkg').textContent=pl;
-          const sp=$('successPkgBadge');if(payload.paket==='pro'){sp.style.background='rgba(168,85,247,.08)';sp.style.borderColor='rgba(168,85,247,.2)';sp.style.color='#a855f7'}else{sp.style.background='rgba(6,182,212,.08)';sp.style.borderColor='rgba(6,182,212,.2)';sp.style.color='#06b6d4'}
-          goToStep(3);
-        }else{
-          showToast(d.message||'Gagal mendaftar.','error');
-          if(d.field==='username'){inputUsername.classList.add('error');inputUsername.classList.remove('valid');inputUsername.dataset.available='false';setStatus('Username','<i class="fa-solid fa-circle-xmark"></i> Sudah digunakan','error')}
-        }
-      }catch(e){showToast('Gagal terhubung ke server.','error');console.error(e)}
-      btn.innerHTML='Daftar Sekarang <i class="fa-solid fa-paper-plane" style="margin-left:6px"></i>';btn.disabled=false;isSubmitting=false;
+
+      const payload = {
+        nama: $('inputNama').value.trim(),
+        username: $('inputUsername').value.trim(),
+        whatsapp: $('inputWA').value.trim(),
+        email: $('inputEmail').value.trim(),
+        password: $('inputPassword').value,
+        paket: selectedPkg,
+        waktu: new Date().toISOString()
+      };
+
+      // 1. Simpan ke LocalStorage (sebagai data.txt pengganti database)
+      const db = getDB();
+      db.push(payload);
+      saveDB(db);
+
+      // 2. Kirim ke WhatsApp kamu via Wa.me (sebagai notifikasi admin)
+      const pkgLabel = payload.paket === 'pro' ? 'Pro (20K)' : 'Starter (15K)';
+      const waMsg = encodeURIComponent(
+        `*PENDAFTARAN BARU - ZYNEX STUDIO*\n\n` +
+        `Nama: ${payload.nama}\n` +
+        `Username: ${payload.username}\n` +
+        `WhatsApp: ${payload.whatsapp}\n` +
+        `Email: ${payload.email}\n` +
+        `Paket: ${pkgLabel}\n` +
+        `Waktu: ${new Date(payload.waktu).toLocaleString('id-ID')}`
+      );
+      window.open(`https://wa.me/6285141308100?text=${waMsg}`, '_blank');
+
+      // 3. Tampilkan sukses
+      showToast('Akun berhasil dibuat!', 'success');
+      $('successNama').textContent = payload.nama;
+      $('successUsername').textContent = payload.username;
+      $('successWA').textContent = payload.whatsapp;
+      $('successEmail').textContent = payload.email;
+      $('successPkg').textContent = pkgLabel;
+      const sp = $('successPkgBadge');
+      if(payload.paket === 'pro'){sp.style.background='rgba(168,85,247,.08)';sp.style.borderColor='rgba(168,85,247,.2)';sp.style.color='#a855f7'}
+      else{sp.style.background='rgba(6,182,212,.08)';sp.style.borderColor='rgba(6,182,212,.2)';sp.style.color='#06b6d4'}
+      goToStep(3);
+
+      btn.innerHTML = 'Daftar Sekarang <i class="fa-solid fa-paper-plane" style="margin-left:6px"></i>';
+      btn.disabled = false; isSubmitting = false;
     }
   </script>
 </body>
